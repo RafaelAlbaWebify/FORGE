@@ -26,6 +26,12 @@ const viewports = [{ width: 1920, height: 1080 }, { width: 1366, height: 768 }, 
     await page.locator('header details > summary').click();
     await page.click('#edit');
     await page.waitForSelector('#edit-dialog[open] .editor-row');
+    await page.locator('#edit-dialog [data-kind="mission"] .editor-more summary').first().click();
+    for (const field of ['project_id', 'milestone_id', 'result', 'success_evidence', 'blocker_active']) {
+      await page.waitForSelector(`#edit-dialog [data-kind="mission"] [data-field="${field}"]`, { state: 'visible' });
+    }
+    const dialogOverflow = await page.locator('#edit-dialog').evaluate(el => el.scrollWidth > el.clientWidth);
+    if (dialogOverflow) throw new Error(`Editor horizontal overflow at ${viewport.width}px`);
     await page.click('#edit-dialog [data-close]');
     if (errors.length) throw new Error(errors.join('; '));
     await page.close();
