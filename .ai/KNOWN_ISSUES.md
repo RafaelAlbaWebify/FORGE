@@ -4,12 +4,10 @@
 
 - Severity: P1
 - Module: UI/testing
-- Status: open
-- Description: `tests/ui_smoke.js` exists, but Chromium could not be downloaded in the current environment; no successful multi-viewport run is recorded.
-- Reproduction: run the script with Playwright and an installed Chromium browser.
-- Workaround: manual Windows Chrome inspection plus backend/contract tests.
-- Blocking effect: internal/external testing gates remain closed.
-- Next action: run on Rafael's Windows computer and retain transcript/screenshots.
+- Status: resolved 2026-09-05
+- Description: the GitHub browser job now executes the daily workflow in real Chromium at four viewport sizes.
+- Resolution evidence: Actions run 33947006546 passes at 1920×1080, 1366×768, 820×1000 and 390×844 after correcting the overflow-menu interaction.
+- Follow-up: retain human Windows Chrome visual and accessibility acceptance as part of FORGE-003.
 
 ## FORGE-002 — Advanced editor lacks full field parity
 
