@@ -1,10 +1,10 @@
 {
   "last_run_date": "2026-09-05",
-  "tested_commit": "2e4ae1d745daeb383a9d66cc3ab76f3f28e83947",
+  "tested_commit": "e6f9a3a626eaba1b1655059ff36137c91480327a",
   "tested_version": "0.10.0",
   "git_available": true,
   "suites": [
-    {"name": "Python unittest", "command": "python -m unittest discover -s tests -v", "passed": 51, "failed": 0, "skipped": 0, "status": "pass", "platforms": ["ubuntu-latest", "windows-latest"]},
+    {"name": "Python unittest", "command": "python -m unittest discover -s tests -v", "passed": 52, "failed": 0, "skipped": 0, "status": "pass", "platforms": ["ubuntu-latest", "windows-latest"]},
     {"name": "Python syntax", "command": "python -m py_compile forge_app.py", "status": "pass"},
     {"name": "JavaScript syntax", "command": "node --check static/app.js", "status": "pass"},
     {"name": "Playwright UI smoke", "command": "node tests/ui_smoke.js", "status": "pass", "viewports": ["1920x1080", "1366x768", "820x1000", "390x844"], "environment": "GitHub ubuntu-latest Chromium"}
