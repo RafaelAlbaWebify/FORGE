@@ -3,17 +3,17 @@
   "version": "0.10.0",
   "last_updated": "2026-09-05",
   "git": {"is_repository": true, "commit": null, "branch": "main", "remote": "https://github.com/RafaelAlbaWebify/FORGE", "visibility": "public"},
-  "current_phase": "Windows installation acceptance and advanced-editor completion",
-  "current_milestone": "Verify the 0.10.0 daily workflow in Windows Chrome and close remaining P1 GUI gaps",
-  "overall_completion_percent": 80,
-  "operability_percent": 72,
-  "testing_percent": 88,
+  "current_phase": "Windows installation acceptance and restore verification",
+  "current_milestone": "Verify the 0.10.0 install, upgrade, shortcut and restore workflows on a real Windows machine",
+  "overall_completion_percent": 82,
+  "operability_percent": 76,
+  "testing_percent": 91,
   "current_blockers": [
-    "Fresh 0.10.0 Windows install/upgrade and visual acceptance are not yet evidenced",
-    "Advanced GUI editing does not expose every backend-supported field"
+    "Fresh 0.10.0 Windows install/upgrade and human visual acceptance are not yet evidenced",
+    "A complete backup-to-restore drill has not yet been executed"
   ],
   "known_critical_failures": [],
-  "active_workstreams": ["Windows GUI acceptance", "advanced editor parity", "restore verification", "release verification"],
+  "active_workstreams": ["Windows installer acceptance", "restore verification", "release verification"],
   "completed_milestones": [
     "Crash-safe focus timer with pause/resume/manual correction",
     "SQLite backups and installer rollback path",
@@ -21,17 +21,16 @@
     "Today/Map/Review compact workflow",
     "Persistent .ai project-control bootstrap"
     ,"Privacy-safe local Git and public GitHub CI bootstrap",
-    "Hosted Linux, Windows and four-viewport Chromium verification"
+    "Hosted Linux, Windows and four-viewport Chromium verification",
+    "Complete advanced-editor parity for user-owned fields"
   ],
   "pending_milestones": [
     "Fresh Windows upgrade acceptance with retained user data",
-    "Complete GUI/backend edit-field parity",
     "Verified backup restoration drill",
     "Consolidated maintainable frontend source"
   ],
   "next_recommended_actions": [
-    "Capture screenshots at 1920x1080, 1366x768 and narrow widths and record defects",
-    "Expose or intentionally remove every backend-editable field from the advanced GUI",
+    "Execute a fresh 0.10.0 install and upgrade on the user's Windows machine, retaining data and validating the shortcut",
     "Perform and document a backup-to-restore drill",
     "Only then reassess internal-testing readiness"
   ],
@@ -44,13 +43,13 @@
   },
   "last_verified_evidence": {
     "date": "2026-09-05",
-    "python_tests": {"passed": 51, "failed": 0, "platforms": ["Linux", "Windows"]},
+    "python_tests": {"passed": 52, "failed": 0, "platforms": ["Linux", "Windows"]},
     "syntax": {"python": "pass", "javascript": "pass", "html_parse": "pass"},
     "api_smoke": "pass on clean temporary instance",
     "database_migration_copy": "pass; SQLite integrity_check=ok",
     "playwright": "pass in hosted Chromium at 1920x1080, 1366x768, 820x1000 and 390x844",
-    "github_actions": "all three jobs pass on commit 2e4ae1d745daeb383a9d66cc3ab76f3f28e83947",
-    "windows_runtime": "51 tests and loopback identity smoke pass on windows-latest",
+    "github_actions": "all three jobs pass on advanced-editor head e6f9a3a626eaba1b1655059ff36137c91480327a (run 33948072276); merged as ed4991a3f7b165df7ae37db6380130e90b303348",
+    "windows_runtime": "52 tests and loopback identity smoke pass on windows-latest",
     "windows_installer": "not yet executed as a full clean install/upgrade/rollback acceptance"
   }
 }

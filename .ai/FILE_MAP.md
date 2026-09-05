@@ -25,7 +25,7 @@
 ## Verification
 
 - `tests/test_forge.py` — unit/integration/contract suite using disposable databases.
-- `tests/ui_smoke.js` — Playwright workflow and viewport checks; currently not executed successfully.
+- `tests/ui_smoke.js` — Playwright daily/editor workflow and overflow checks, passing at four viewport sizes in GitHub Actions.
 - `.ai/TEST_STATUS.json` — latest verified status.
 
 ## Generated/user-owned runtime data

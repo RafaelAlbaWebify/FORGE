@@ -21,10 +21,10 @@ FORGE is Rafael Alba's private, local Windows execution-and-evidence console. It
 ## Current verified state
 
 - Version: 0.10.0.
-- 50 Python tests pass on 2026-09-05.
+- 52 Python tests pass on Linux and Windows on 2026-09-05.
 - Python/JavaScript syntax, HTML structure, clean-server API and copied-database migration checks pass.
-- Playwright browser execution is **not verified**: browser download failed in the current environment.
-- Current milestone: validate the 0.10.0 GUI on Windows/Chrome, close remaining GUI edit gaps, then define a release gate.
+- Playwright passes the daily and advanced-editor workflow in hosted Chromium at four supported viewport sizes.
+- Current milestone: execute the 0.10.0 installer/upgrade and backup-restore acceptance on a real Windows machine.
 
 ## Start here
 
