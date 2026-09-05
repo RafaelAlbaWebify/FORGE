@@ -20,9 +20,14 @@ dialog{max-height:88vh;overflow:auto}
 .editor-section{margin:18px 0}
 .editor-row{display:grid;grid-template-columns:1.4fr .65fr .65fr 1.5fr auto;gap:8px;align-items:end;padding:10px 0;border-bottom:1px solid var(--line)}
 .editor-row label{margin:0}
-.editor-row input,.editor-row select{width:100%;background:#0a1325;border:1px solid var(--line);border-radius:8px;padding:9px}
+.editor-row input,.editor-row select,.editor-row textarea{width:100%;background:#0a1325;border:1px solid var(--line);border-radius:8px;padding:9px}
+.editor-more{grid-column:1/-1;background:#0a132580;border:1px solid var(--line);border-radius:8px;padding:0 10px}
+.editor-more summary{cursor:pointer;padding:8px 0;color:var(--muted);font-size:12px}
+.editor-fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:0 0 10px}
+.editor-fields .wide{grid-column:span 2}.editor-fields .check{display:flex;align-items:center;gap:8px}.editor-fields .check input{width:auto}
 .archive-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px;border-bottom:1px solid var(--line)}
 .editor-actions{display:flex;gap:5px}.editor-actions button{padding:8px}.danger{color:#ff8092}
-@media(max-width:1000px){.mission{grid-template-columns:1fr auto}.mission-outcome{grid-column:1/-1;justify-content:flex-start}.outcome-summary{max-width:none}.editor-row{grid-template-columns:1fr 1fr}.editor-row>*:first-child{grid-column:1/-1}}
+@media(max-width:1000px){.mission{grid-template-columns:1fr auto}.mission-outcome{grid-column:1/-1;justify-content:flex-start}.outcome-summary{max-width:none}.editor-row{grid-template-columns:1fr 1fr}.editor-row>*:first-child{grid-column:1/-1}.editor-fields{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.editor-fields{grid-template-columns:1fr}.editor-fields .wide{grid-column:auto}}
 @media(max-width:850px){.mission{grid-template-columns:1fr}.mission-outcome{grid-column:auto}.summary,.review-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.summary,.review-grid{grid-template-columns:1fr}.mission-outcome{align-items:stretch;flex-direction:column}.finish-button{width:100%}}
