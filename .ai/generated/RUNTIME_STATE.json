@@ -1,22 +1,21 @@
 {
-  "generated_at": "2026-09-05T05:25:35+00:00",
+  "generated_at": "2026-09-05T05:49:35+00:00",
   "project": "FORGE",
   "version": "0.10.0",
   "git": {
     "is_repository": true,
-    "branch": "main",
-    "commit": "1632de90f63a063ae4c1a78fd39773d4b4d5918f",
-    "status": " M .ai/KNOWN_ISSUES.md\n M .ai/OPERABILITY.md\n M .ai/PROJECT_STATE.json\n M .ai/TEST_STATUS.json\n"
+    "branch": "fix/advanced-editor-parity",
+    "commit": "ff8576cc4c7340d2d20246edd69581cd1b140632",
+    "status": " M .ai/BOOTSTRAP_VALIDATION.md\n M .ai/CONTEXT.md\n M .ai/FILE_MAP.md\n M .ai/KNOWN_ISSUES.md\n M .ai/OPERABILITY.md\n M .ai/PROJECT_STATE.json\n M .ai/ROADMAP.md\n M .ai/TEST_STATUS.json\n M .ai/contracts/UI.md\n"
   },
-  "current_phase": "Windows installation acceptance and advanced-editor completion",
-  "current_milestone": "Verify the 0.10.0 daily workflow in Windows Chrome and close remaining P1 GUI gaps",
+  "current_phase": "Windows installation acceptance and restore verification",
+  "current_milestone": "Verify the 0.10.0 install, upgrade, shortcut and restore workflows on a real Windows machine",
   "blockers": [
-    "Fresh 0.10.0 Windows install/upgrade and visual acceptance are not yet evidenced",
-    "Advanced GUI editing does not expose every backend-supported field"
+    "Fresh 0.10.0 Windows install/upgrade and human visual acceptance are not yet evidenced",
+    "A complete backup-to-restore drill has not yet been executed"
   ],
   "next_actions": [
-    "Capture screenshots at 1920x1080, 1366x768 and narrow widths and record defects",
-    "Expose or intentionally remove every backend-editable field from the advanced GUI",
+    "Execute a fresh 0.10.0 install and upgrade on the user's Windows machine, retaining data and validating the shortcut",
     "Perform and document a backup-to-restore drill",
     "Only then reassess internal-testing readiness"
   ],
@@ -255,7 +254,7 @@
     "command": "python -m unittest discover -s tests",
     "exit_code": 0,
     "stdout": "",
-    "stderr": "...................................................\n----------------------------------------------------------------------\nRan 51 tests in 0.589s\n\nOK\n"
+    "stderr": "....................................................\n----------------------------------------------------------------------\nRan 52 tests in 0.574s\n\nOK\n"
   },
   "notice": "Generated evidence only. Decisions, issues and historical ledgers remain manually maintained."
 }
