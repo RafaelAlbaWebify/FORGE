@@ -3,17 +3,16 @@
   "version": "0.10.0",
   "last_updated": "2026-09-05",
   "git": {"is_repository": true, "commit": null, "branch": "main", "remote": "https://github.com/RafaelAlbaWebify/FORGE", "visibility": "public"},
-  "current_phase": "Windows installation acceptance and restore verification",
-  "current_milestone": "Verify the 0.10.0 install, upgrade, shortcut and restore workflows on a real Windows machine",
-  "overall_completion_percent": 82,
-  "operability_percent": 76,
-  "testing_percent": 91,
+  "current_phase": "Human Windows acceptance and release hardening",
+  "current_milestone": "Run the 0.10.0 release on Rafael's Windows installation and verify the real Desktop shortcut and retained records",
+  "overall_completion_percent": 86,
+  "operability_percent": 82,
+  "testing_percent": 95,
   "current_blockers": [
-    "Fresh 0.10.0 Windows install/upgrade and human visual acceptance are not yet evidenced",
-    "A complete backup-to-restore drill has not yet been executed"
+    "Rafael's real 0.10.0 install/upgrade, Desktop shortcut and human visual acceptance are not yet evidenced"
   ],
   "known_critical_failures": [],
-  "active_workstreams": ["Windows installer acceptance", "restore verification", "release verification"],
+  "active_workstreams": ["Human Windows acceptance", "release verification", "accessibility acceptance"],
   "completed_milestones": [
     "Crash-safe focus timer with pause/resume/manual correction",
     "SQLite backups and installer rollback path",
@@ -22,16 +21,16 @@
     "Persistent .ai project-control bootstrap"
     ,"Privacy-safe local Git and public GitHub CI bootstrap",
     "Hosted Linux, Windows and four-viewport Chromium verification",
-    "Complete advanced-editor parity for user-owned fields"
+    "Complete advanced-editor parity for user-owned fields",
+    "Automated Windows clean-install, upgrade, shortcut, restore and rollback acceptance"
   ],
   "pending_milestones": [
     "Fresh Windows upgrade acceptance with retained user data",
-    "Verified backup restoration drill",
     "Consolidated maintainable frontend source"
   ],
   "next_recommended_actions": [
-    "Execute a fresh 0.10.0 install and upgrade on the user's Windows machine, retaining data and validating the shortcut",
-    "Perform and document a backup-to-restore drill",
+    "Install the verified 0.10.0 release on Rafael's Windows machine and confirm the real Desktop shortcut opens the retained data",
+    "Perform a short human Chrome visual and keyboard check",
     "Only then reassess internal-testing readiness"
   ],
   "readiness": {
@@ -43,13 +42,13 @@
   },
   "last_verified_evidence": {
     "date": "2026-09-05",
-    "python_tests": {"passed": 52, "failed": 0, "platforms": ["Linux", "Windows"]},
+    "python_tests": {"passed": 54, "failed": 0, "platforms": ["Linux", "Windows"]},
     "syntax": {"python": "pass", "javascript": "pass", "html_parse": "pass"},
     "api_smoke": "pass on clean temporary instance",
     "database_migration_copy": "pass; SQLite integrity_check=ok",
     "playwright": "pass in hosted Chromium at 1920x1080, 1366x768, 820x1000 and 390x844",
-    "github_actions": "all three jobs pass on advanced-editor head e6f9a3a626eaba1b1655059ff36137c91480327a (run 33948072276); merged as ed4991a3f7b165df7ae37db6380130e90b303348",
-    "windows_runtime": "52 tests and loopback identity smoke pass on windows-latest",
-    "windows_installer": "not yet executed as a full clean install/upgrade/rollback acceptance"
+    "github_actions": "all three jobs pass on head 8b166dec46841e6d2d2f7a115746f9972ef2270a (run 33949201547); merged as e53acfcabf6cd9bfd42971cf9171f84942d69ee5",
+    "windows_runtime": "54 tests, loopback identity and isolated installer acceptance pass on windows-latest",
+    "windows_installer": "automated clean install, shortcut target, data-preserving upgrade, backup restore and forced rollback pass; real user-machine acceptance remains"
   }
 }

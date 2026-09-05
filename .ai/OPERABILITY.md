@@ -4,7 +4,7 @@
 
 **Development usable: PASS. Internal testing ready: FAIL. External testing ready: FAIL. Real prospect ready: FAIL/not applicable to the current personal-tool boundary. Production ready: FAIL.**
 
-The current operability estimate is **76%**. Core behavior and complete advanced editing pass on hosted Linux and Windows, and the browser workflow passes in Chromium at four viewport sizes. Full Windows installation/upgrade, human visual acceptance and restore evidence remain missing.
+The current operability estimate is **82%**. Core behavior, complete advanced editing and isolated Windows install/upgrade/restore/rollback acceptance pass. Rafael's real Desktop shortcut, retained-data check and human visual/accessibility acceptance remain missing.
 
 Local Git, privacy exclusions and GitHub CI definitions are now present. These improve provenance but do not raise runtime readiness until the remote workflows actually pass.
 
@@ -19,16 +19,17 @@ Local Git, privacy exclusions and GitHub CI definitions are now present. These i
 ## Internal testing ready — FAIL
 
 - [x] Development usable passes.
-- [x] 52 Python tests pass on Linux and Windows.
+- [x] 54 Python tests pass on Linux and Windows.
 - [x] Python/JavaScript/HTML static checks pass.
 - [x] Multi-viewport Playwright workflow passes in actual Chromium.
 - [x] All known P1 GUI discrepancies are closed or explicitly accepted.
-- [ ] Fresh Windows upgrade retains existing data and launches shortcut.
+- [x] Isolated Windows upgrade retains seeded data and creates a correctly targeted shortcut.
+- [ ] Rafael's real Windows upgrade retains existing data and the Desktop shortcut launches it.
 
 ## External beta/testing ready — FAIL
 
 - [ ] Internal testing ready passes.
-- [ ] Backup restoration drill passes.
+- [x] Backup restoration drill passes in a disposable Windows target.
 - [ ] Error messages and recovery are manually verified.
 - [ ] Installation instructions are validated by a clean user path.
 - [ ] Privacy boundaries and exported snapshot contents are reviewed.
