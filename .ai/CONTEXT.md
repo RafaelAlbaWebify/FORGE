@@ -29,7 +29,7 @@ FORGE is Rafael Alba's private, local Windows execution-and-evidence console. It
 ## Start here
 
 1. Read `.ai/PROJECT_STATE.json`, `.ai/KNOWN_ISSUES.md` and `.ai/OPERABILITY.md`.
-2. Inspect working-tree state. This directory currently has no Git metadata; do not invent a commit or branch.
+2. Inspect working-tree and remote state. The canonical branch is `main` and the public GitHub remote is `RafaelAlbaWebify/FORGE`; do not invent commit or CI status.
 3. Read the relevant contract in `.ai/contracts/` and only then inspect its implementation.
 4. Run `python tools/build_ai_context.py --run-tests` when Python is available.
 5. Update canonical `.ai/` state before ending material work.

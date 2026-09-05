@@ -31,7 +31,7 @@ SQLite uses WAL, foreign keys and a busy timeout. A heartbeat limits elapsed tim
 
 ## Source and release control
 
-The installed computer owns mutable personal data. The Git working tree owns reproducible code and project-control documents. A private GitHub remote is the intended off-device source mirror and CI runner; it must never be used to synchronise the SQLite database or AI exports. `tools/build_release.py` selects an explicit application allowlist and rejects private data before creating a ZIP.
+The installed computer owns mutable personal data. The Git working tree owns reproducible code and project-control documents. The public GitHub remote is the off-device source mirror and CI runner; it must never be used to synchronise the SQLite database or AI exports. `tools/build_release.py` selects an explicit application allowlist and rejects private data before creating a ZIP.
 
 ## Weaknesses
 

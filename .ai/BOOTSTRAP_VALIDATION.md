@@ -17,6 +17,6 @@ Validated on 2026-09-05 against `.ai/` and current source, without relying on an
 
 ## Result
 
-PASS for project reconstruction. A fresh session can identify purpose, architecture, evidence, open P1 gates, current milestone and next actions. It will also see that Git metadata, successful Playwright execution, fresh Windows acceptance and restore-drill evidence do not exist.
+PASS for project reconstruction. A fresh session can identify purpose, architecture, evidence, open P1 gates, current milestone and next actions. It will also see that public Git source control exists while successful Playwright execution, fresh Windows acceptance and restore-drill evidence remain unverified.
 
 The remaining weakness is operational freshness: after material code changes, agents must update the canonical state and run the context builder. Automation deliberately does not rewrite decisions/issues because those require judgment.

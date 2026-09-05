@@ -70,11 +70,11 @@
 - Workaround: sufficient for current small dataset.
 - Next action: add pagination only when actual volume approaches the cap.
 
-## FORGE-008 — Private GitHub remote not connected
+## FORGE-008 — Git source control unavailable
 
 - Severity: P2
 - Module: project control
-- Status: open
-- Description: local Git history and CI configuration exist, but no private GitHub repository has been selected, created or pushed.
-- Workaround: local commits and versioned release ZIPs preserve source history on this computer.
-- Next action: create or select a private GitHub repository, add it as `origin`, push `main`, and confirm all three CI jobs pass.
+- Status: resolved 2026-09-05
+- Description: local Git history and the public `RafaelAlbaWebify/FORGE` remote now preserve application source and project-control history.
+- Resolution evidence: baseline source published to GitHub with 43 tracked files; local runtime directories remain ignored.
+- Follow-up: confirm all three hosted CI jobs pass before crediting readiness.

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-05T04:41:47+00:00",
+  "generated_at": "2026-09-05T05:12:32+00:00",
   "project": "FORGE",
   "version": "0.10.0",
   "git": {
     "is_repository": true,
     "branch": "main",
-    "commit": "HEAD",
-    "status": "?? .ai/\n?? .gitattributes\n?? .github/\n?? .gitignore\n?? BACKUP_FORGE.bat\n?? Backup-FORGE.ps1\n?? INSTALL_FORGE.bat\n?? Install-FORGE.ps1\n?? README.md\n?? START_FORGE.bat\n?? Start-FORGE.ps1\n?? VERSION.txt\n?? forge_app.py\n?? package-lock.json\n?? package.json\n?? static/\n?? tests/\n?? tools/\n"
+    "commit": "dbe20ecaffe15eb4a24b4b1e249757f1fe393c17",
+    "status": " M .ai/ARCHITECTURE.md\n M .ai/BOOTSTRAP_VALIDATION.md\n M .ai/CONTEXT.md\n M .ai/DECISIONS.md\n M .ai/KNOWN_ISSUES.md\n M .ai/PROJECT_STATE.json\n M README.md\n"
   },
-  "current_phase": "GUI stabilization and local/private-Git integration",
+  "current_phase": "GUI stabilization and public GitHub CI activation",
   "current_milestone": "Verify the 0.10.0 daily workflow in Windows Chrome and close remaining P1 GUI gaps",
   "blockers": [
     "Playwright browser smoke suite has not completed in the current environment",
@@ -16,7 +16,7 @@
     "Advanced GUI editing does not expose every backend-supported field"
   ],
   "next_actions": [
-    "Connect a private GitHub remote and verify the core, browser and Windows-runtime CI jobs",
+    "Verify the core, browser and Windows-runtime GitHub CI jobs on the public remote",
     "Run tests/ui_smoke.js against installed FORGE on Windows with Playwright available",
     "Capture screenshots at 1920x1080, 1366x768 and narrow widths and record defects",
     "Expose or intentionally remove every backend-editable field from the advanced GUI",

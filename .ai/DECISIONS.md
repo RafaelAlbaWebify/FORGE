@@ -47,12 +47,12 @@
 - Status: accepted
 - Decision: Today, Map and Review are primary; structure editing, archive and backup sit under the overflow menu.
 
-## D-009 — Dual local/private-Git model
+## D-009 — Dual local-data/public-code model
 
 - Status: accepted
-- Decision: the local installation is authoritative for personal runtime data; Git and a private GitHub repository are authoritative for source, tests, documentation and release automation.
+- Decision: the local installation is authoritative for personal runtime data; Git and the public GitHub repository are authoritative for source, tests, documentation and release automation.
 - Reason: preserve private journal data while gaining reviewable history, rollback, CI and off-device source continuity.
-- Consequence: `data/`, `backups/`, `exports/`, secrets and generated local artifacts are ignored and must never enter commits or release packages.
+- Consequence: `data/`, `backups/`, `exports/`, secrets and generated local artifacts are ignored and must never enter commits or release packages. Public visibility is accepted so standard GitHub-hosted Actions do not consume the private-repository allowance.
 
 ## D-010 — Minimal branch workflow
 

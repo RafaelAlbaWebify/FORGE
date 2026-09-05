@@ -1,6 +1,6 @@
 # Generated FORGE Context
 
-Generated: 2026-09-05T04:41:47+00:00
+Generated: 2026-09-05T05:12:32+00:00
 Version: 0.10.0
 Git repository: True
 
@@ -14,7 +14,7 @@ Current milestone: Verify the 0.10.0 daily workflow in Windows Chrome and close 
 
 ## Next actions
 
-- Connect a private GitHub remote and verify the core, browser and Windows-runtime CI jobs
+- Verify the core, browser and Windows-runtime GitHub CI jobs on the public remote
 - Run tests/ui_smoke.js against installed FORGE on Windows with Playwright available
 - Capture screenshots at 1920x1080, 1366x768 and narrow widths and record defects
 - Expose or intentionally remove every backend-editable field from the advanced GUI

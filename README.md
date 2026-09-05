@@ -4,11 +4,11 @@ FORGE is a private local execution and evidence console. FORGE records facts; Ch
 
 Future development sessions bootstrap from `.ai/CONTEXT.md` and `.ai/PROJECT_STATE.json`; repository evidence is authoritative over chat history.
 
-## Local + private GitHub model
+## Local data + public GitHub model
 
 - **The computer is authoritative for personal runtime data:** `data/`, `backups/` and `exports/` never enter Git.
 - **Git is authoritative for reproducible project assets:** source, tests, Windows scripts, documentation and `.ai/` control files.
-- **A private GitHub repository provides off-device source history and CI.** It is not a journal sync service.
+- **The public GitHub repository provides off-device source history and unrestricted standard-runner CI.** It contains application code only; it is not a journal sync service.
 - Work on short-lived `feature/*` or `fix/*` branches, verify through a pull request, then merge to `main`. Keep the model deliberately small; no permanent `develop` branch.
 
 Run `python tools/build_release.py --output dist/FORGE_WINDOWS.zip` to create a privacy-checked Windows package. GitHub Actions repeats the unit, browser, Windows-runtime and packaging checks.
