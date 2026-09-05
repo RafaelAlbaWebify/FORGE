@@ -16,6 +16,7 @@ RELEASE_ROOT_FILES = {
     "forge_app.py", "README.md", "VERSION.txt", "INSTALL_FORGE.bat",
     "Install-FORGE.ps1", "START_FORGE.bat", "Start-FORGE.ps1",
     "BACKUP_FORGE.bat", "Backup-FORGE.ps1",
+    "Test-FORGE-Windows.ps1",
 }
 
 
