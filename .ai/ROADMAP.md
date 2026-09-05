@@ -8,7 +8,7 @@ Status requires acceptance evidence, not code presence.
 | F-002 | Completed | AI snapshot/import v2 | Stable IDs, SQLite | Self-describing export; stale and duplicate imports rejected; preview selectable | Export/import tests |
 | F-003 | Completed | Compact Today/Map/Review structure | API payloads | Three views render from current APIs; no old v080 assets | Frontend contract tests |
 | F-004 | Active | Windows GUI acceptance | 0.10.0 installed; browser | No overlap/overflow; every primary action works at target viewports | Executed Playwright report + screenshots |
-| F-005 | Active | Advanced editor parity | Field inventory | Every retained user-owned field is editable or explicitly AI-owned/read-only | Field matrix + interaction tests |
+| F-005 | Completed | Advanced editor parity | Field inventory | Every retained user-owned field is editable or explicitly AI-owned/read-only | 52 tests + Actions run 33948072276 |
 | F-006 | Next | Backup restoration drill | Valid backup | Restore copy boots with unchanged counts and integrity check | Recorded drill output |
 | F-007 | Next | Frontend consolidation | F-004/F-005 | Maintainable modules; no corrective CSS layering; behavior unchanged | Review + UI regression suite |
 | F-008 | Next | Installer acceptance | Windows + prior DB | Upgrade retains record counts, shortcut works, rollback simulated | Windows transcript |
