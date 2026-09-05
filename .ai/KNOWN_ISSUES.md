@@ -13,12 +13,13 @@
 
 - Severity: P1
 - Module: UI
-- Status: open
+- Status: resolved 2026-09-05
 - Description: backend supports more mission/project/milestone fields than the advanced dialog exposes. Examples include links, objective, milestone weight/evidence and several mission evidence/progress fields.
 - Evidence: comparison of `normalize_*_fields` with `openEditor()`.
 - Workaround: AI plan import or existing contextual outcome dialog for some fields.
 - Blocking effect: earlier requirement that all sections be editable is not fully met through GUI.
-- Next action: make a field ownership matrix, expose useful fields and mark AI-owned/computed fields read-only.
+- Resolution evidence: PR #1 exposes every retained user-owned field under compact Details sections; 52 tests and Playwright at four viewports passed in Actions run 33948072276.
+- Follow-up: computed values and lifecycle state remain intentionally read-only or archive/restore-owned.
 
 ## FORGE-003 — Windows installer acceptance is stale/incomplete
 
