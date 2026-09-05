@@ -1,5 +1,7 @@
 import importlib.util
+from contextlib import closing
 import json
+import sqlite3
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -22,6 +24,12 @@ class ForgeTests(unittest.TestCase):
 
     def tearDown(self):
         self.tmp.cleanup()
+
+    def test_connection_context_closes_database_handle(self):
+        with app.connect() as con:
+            con.execute("SELECT 1").fetchone()
+        with self.assertRaises(sqlite3.ProgrammingError):
+            con.execute("SELECT 1")
 
     def test_scores_separate_outcomes_from_sustainability(self):
         payload = app.day_payload("2026-08-27")
@@ -182,8 +190,7 @@ class ForgeTests(unittest.TestCase):
         with app.connect() as con:
             con.execute("UPDATE missions SET result='latest write' WHERE id=?", (mission["id"],))
         target = app.verified_backup("test")
-        import sqlite3
-        with sqlite3.connect(target) as con:
+        with closing(sqlite3.connect(target)) as con:
             self.assertEqual(con.execute("SELECT result FROM missions WHERE id=?", (mission["id"],)).fetchone()[0], "latest write")
             self.assertEqual(con.execute("PRAGMA integrity_check").fetchone()[0], "ok")
 

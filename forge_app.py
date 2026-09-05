@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 import hashlib
 import json
 import mimetypes
@@ -64,9 +65,19 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
 
 
+class ForgeConnection(sqlite3.Connection):
+    """Transactional SQLite connection that also closes at context exit."""
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        try:
+            return super().__exit__(exc_type, exc_value, traceback)
+        finally:
+            self.close()
+
+
 def connect() -> sqlite3.Connection:
     DATA.mkdir(exist_ok=True)
-    con = sqlite3.connect(DB_PATH)
+    con = sqlite3.connect(DB_PATH, factory=ForgeConnection)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys = ON")
     con.execute("PRAGMA journal_mode = WAL")
@@ -190,13 +201,13 @@ def automatic_daily_backup() -> Path:
     target = BACKUPS / f"forge_auto_{date.today().isoformat()}.db"
     if target.exists():
         try:
-            with sqlite3.connect(target) as check:
+            with closing(sqlite3.connect(target)) as check:
                 if check.execute("PRAGMA integrity_check").fetchone()[0] == "ok":
                     return target
         except sqlite3.Error:
             pass
         target.unlink(missing_ok=True)
-    with connect() as src, sqlite3.connect(target) as dst:
+    with connect() as src, closing(sqlite3.connect(target)) as dst:
         src.backup(dst)
     return target
 
@@ -205,9 +216,9 @@ def verified_backup(prefix: str = "forge") -> Path:
     """Create a consistent SQLite backup, including data still present in WAL."""
     BACKUPS.mkdir(exist_ok=True)
     target = BACKUPS / f"{prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}.db"
-    with connect() as src, sqlite3.connect(target) as dst:
+    with connect() as src, closing(sqlite3.connect(target)) as dst:
         src.backup(dst)
-    with sqlite3.connect(target) as check:
+    with closing(sqlite3.connect(target)) as check:
         if check.execute("PRAGMA integrity_check").fetchone()[0] != "ok":
             target.unlink(missing_ok=True)
             raise RuntimeError("Backup integrity check failed")

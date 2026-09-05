@@ -23,6 +23,7 @@ const viewports = [{ width: 1920, height: 1080 }, { width: 1366, height: 768 }, 
     await page.locator('.mission [data-finish]').first().click();
     await page.waitForSelector('#finish-dialog[open]');
     await page.click('#finish-dialog [data-close]');
+    await page.locator('header details > summary').click();
     await page.click('#edit');
     await page.waitForSelector('#edit-dialog[open] .editor-row');
     await page.click('#edit-dialog [data-close]');
