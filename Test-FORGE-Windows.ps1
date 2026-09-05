@@ -42,7 +42,11 @@ try {
     if (-not (Test-Path -LiteralPath $shortcut)) { throw "Installer did not create the shortcut." }
     $shell = New-Object -ComObject WScript.Shell
     $link = $shell.CreateShortcut($shortcut)
-    if ($link.Arguments -notlike "*$install\forge_app.py*") { throw "Shortcut does not target the isolated installation." }
+    $shortcutArgument = [IO.Path]::GetFullPath($link.Arguments.Trim().Trim('"'))
+    $expectedArgument = [IO.Path]::GetFullPath((Join-Path $install "forge_app.py"))
+    if ($shortcutArgument -ne $expectedArgument) {
+        throw "Shortcut target mismatch. Expected '$expectedArgument'; found '$shortcutArgument'."
+    }
 
     Write-Host "[2/5] Seed preservation marker and upgrade" -ForegroundColor Cyan
     $python = (Get-Command python.exe).Source
