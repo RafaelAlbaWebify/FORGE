@@ -324,6 +324,18 @@ class ForgeTests(unittest.TestCase):
             self.assertIn(f'data-field="{field}"', javascript)
         self.assertNotIn('data-field="active"', javascript)  # Archive/restore owns lifecycle state.
 
+    def test_identity_is_bound_to_exact_installation_root(self):
+        source = Path(app.__file__).read_text(encoding="utf-8")
+        self.assertIn('"root": str(ROOT)', source)
+        self.assertIn('Path(identity_root).resolve() == ROOT', source)
+
+    def test_windows_acceptance_script_is_in_release(self):
+        build_source = (Path(__file__).parents[1] / "tools" / "build_release.py").read_text(encoding="utf-8")
+        self.assertIn('"Test-FORGE-Windows.ps1"', build_source)
+        acceptance = (Path(__file__).parents[1] / "Test-FORGE-Windows.ps1").read_text(encoding="utf-8")
+        for evidence in ("Clean isolated installation", "Seed preservation marker", "Verified backup", "Forced failed upgrade"):
+            self.assertIn(evidence, acceptance)
+
     def test_project_and_milestone_fields_are_editable(self):
         project = app.projects_payload()[0]; milestone = project["milestones"][0]
         project_fields = app.normalize_project_fields({"name": "Edited project", "area": "webify", "objective": "Edited objective", "next_action": "Edited action"})

@@ -21,6 +21,8 @@ Run `python tools/build_release.py --output dist/FORGE_WINDOWS.zip` to create a 
 
 The installer stops only the prior FORGE process, creates a verified backup, preserves the database/exports/backups, applies additive migrations, verifies version 0.10.0, and restores the previous application and database if validation fails. JOLT and VERIDRA can run simultaneously because FORGE selects the first free loopback port from `127.0.0.1:8877–8896`.
 
+For an isolated Windows acceptance test that does not alter the real installation, run `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Test-FORGE-Windows.ps1`. It checks installation, shortcut targeting, data-preserving upgrade, backup restoration and forced rollback inside a disposable `%TEMP%` folder.
+
 ## Minimal daily workflow
 
 1. Work from **NOW**, with at most two human-focus actions in **NEXT**. JOLT and VERIDRA remain compact in **BACKGROUND**.

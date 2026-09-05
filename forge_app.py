@@ -1013,7 +1013,7 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         if parsed.path == "/api/identity":
-            return self.send_json({"app": "FORGE", "version": APP_VERSION})
+            return self.send_json({"app": "FORGE", "version": APP_VERSION, "root": str(ROOT)})
         if parsed.path == "/api/day":
             try:
                 day = valid_day(parse_qs(parsed.query).get("date", [date.today().isoformat()])[0])
@@ -1232,7 +1232,9 @@ def main() -> None:
         try:
             with urlopen(f"http://{args.host}:{port}/api/identity", timeout=0.12) as response:
                 identity = json.loads(response.read())
-                if identity.get("app") == "FORGE":
+                identity_root = identity.get("root")
+                same_root = identity_root and Path(identity_root).resolve() == ROOT
+                if identity.get("app") == "FORGE" and same_root:
                     if not args.no_browser:
                         webbrowser.open(f"http://{args.host}:{port}")
                     return

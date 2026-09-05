@@ -1,9 +1,15 @@
+param(
+    [string]$InstallRoot = "",
+    [string]$ShortcutPath = "",
+    [switch]$NoBrowser
+)
+
 $ErrorActionPreference = "Stop"
 
 $source = $PSScriptRoot
-$installRoot = Join-Path $env:LOCALAPPDATA "FORGE"
+$installRoot = if ($InstallRoot) { [IO.Path]::GetFullPath($InstallRoot) } else { Join-Path $env:LOCALAPPDATA "FORGE" }
 $desktop = [Environment]::GetFolderPath("Desktop")
-$shortcutPath = Join-Path $desktop "FORGE.lnk"
+$shortcutPath = if ($ShortcutPath) { [IO.Path]::GetFullPath($ShortcutPath) } else { Join-Path $desktop "FORGE.lnk" }
 $rollbackRoot = $null
 $preBackup = $null
 $upgradeCommitted = $false
@@ -78,7 +84,7 @@ New-Item -ItemType Directory -Path $installRoot -Force | Out-Null
 # Preserve the user's database, exports and backups during upgrades.
 $preserve = @("data", "exports", "backups")
 Get-ChildItem -LiteralPath $source -Force | Where-Object {
-    $_.Name -notin $preserve -and $_.Name -notin @("build-dev", "__pycache__")
+    $_.Name -notin $preserve -and $_.Name -notin @("build-dev", "__pycache__", ".git", ".github", ".ai", "node_modules", "dist", "test-results", "playwright-report")
 } | ForEach-Object {
     Copy-Item -LiteralPath $_.FullName -Destination $installRoot -Recurse -Force
 }
@@ -101,7 +107,9 @@ $shortcut.Description = "FORGE daily command board"
 $shortcut.IconLocation = $pythonPath + ",0"
 $shortcut.Save()
 
-Start-Process -FilePath $pythonPath -ArgumentList ('"' + (Join-Path $installRoot "forge_app.py") + '"') -WorkingDirectory $installRoot
+$launchArguments = @('"' + (Join-Path $installRoot "forge_app.py") + '"')
+if ($NoBrowser) { $launchArguments += "--no-browser" }
+Start-Process -FilePath $pythonPath -ArgumentList $launchArguments -WorkingDirectory $installRoot
 
 $verifiedUrl = $null
 for ($attempt = 0; $attempt -lt 30 -and -not $verifiedUrl; $attempt++) {
@@ -109,7 +117,8 @@ for ($attempt = 0; $attempt -lt 30 -and -not $verifiedUrl; $attempt++) {
     foreach ($port in 8877..8896) {
         try {
             $identity = Invoke-RestMethod -Uri "http://127.0.0.1:$port/api/identity" -TimeoutSec 1
-            if ($identity.app -eq "FORGE" -and $identity.version -eq "0.10.0") {
+            $identityRoot = if ($identity.root) { [IO.Path]::GetFullPath([string]$identity.root) } else { "" }
+            if ($identity.app -eq "FORGE" -and $identity.version -eq "0.10.0" -and $identityRoot -eq $installRoot) {
                 $verifiedUrl = "http://127.0.0.1:$port"
                 break
             }

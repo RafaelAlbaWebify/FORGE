@@ -84,10 +84,13 @@ jobs:
             foreach ($attempt in 1..30) {
               try {
                 $identity = Invoke-RestMethod 'http://127.0.0.1:8877/api/identity'
-                if ($identity.app -eq 'FORGE') { exit 0 }
+                if ($identity.app -eq 'FORGE' -and $identity.root) { exit 0 }
               } catch { Start-Sleep -Seconds 1 }
             }
             throw 'FORGE identity endpoint did not become ready.'
           } finally {
             Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
           }
+      - name: Isolated installer, upgrade, restore and rollback acceptance
+        shell: pwsh
+        run: .\Test-FORGE-Windows.ps1

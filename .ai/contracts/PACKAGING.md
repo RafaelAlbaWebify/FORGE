@@ -6,4 +6,4 @@ Inputs: extracted release ZIP and Python 3.10+. Outputs: `%LOCALAPPDATA%\FORGE`,
 
 Release ZIP must exclude user databases, exports, backups, development builds and bytecode caches.
 
-Current limitation: 0.10.0 Windows execution evidence is pending.
+Acceptance command: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Test-FORGE-Windows.ps1`. It uses a unique temporary installation and shortcut, verifies clean install, data-preserving upgrade, backup restore and forced rollback, then removes the sandbox. A final human check of the real Desktop shortcut remains required.
