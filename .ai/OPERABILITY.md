@@ -4,7 +4,7 @@
 
 **Development usable: PASS. Internal testing ready: FAIL. External testing ready: FAIL. Real prospect ready: FAIL/not applicable to the current personal-tool boundary. Production ready: FAIL.**
 
-The current operability estimate is **72%**. Core behavior now passes on hosted Linux and Windows, and the primary browser workflow passes in Chromium at four viewport sizes. Full Windows installation/upgrade, human visual acceptance and restore evidence remain missing.
+The current operability estimate is **76%**. Core behavior and complete advanced editing pass on hosted Linux and Windows, and the browser workflow passes in Chromium at four viewport sizes. Full Windows installation/upgrade, human visual acceptance and restore evidence remain missing.
 
 Local Git, privacy exclusions and GitHub CI definitions are now present. These improve provenance but do not raise runtime readiness until the remote workflows actually pass.
 
@@ -19,10 +19,10 @@ Local Git, privacy exclusions and GitHub CI definitions are now present. These i
 ## Internal testing ready — FAIL
 
 - [x] Development usable passes.
-- [x] 51 Python tests pass on Linux and Windows.
+- [x] 52 Python tests pass on Linux and Windows.
 - [x] Python/JavaScript/HTML static checks pass.
 - [x] Multi-viewport Playwright workflow passes in actual Chromium.
-- [ ] All P1 GUI discrepancies are closed or explicitly accepted.
+- [x] All known P1 GUI discrepancies are closed or explicitly accepted.
 - [ ] Fresh Windows upgrade retains existing data and launches shortcut.
 
 ## External beta/testing ready — FAIL
