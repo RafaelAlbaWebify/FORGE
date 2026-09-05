@@ -1,0 +1,5 @@
+FORGE 0.10.0
+Build date: 2026-09-03
+
+Persistent project-control release: canonical AI state, readiness gates, decision
+and issue ledgers, module contracts and deterministic context generation.

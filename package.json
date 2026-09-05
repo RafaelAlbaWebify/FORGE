@@ -1,0 +1,12 @@
+{
+  "name": "forge-local",
+  "private": true,
+  "version": "0.10.0",
+  "description": "Development-only browser checks for the local FORGE app",
+  "scripts": {
+    "test:ui": "node tests/ui_smoke.js"
+  },
+  "devDependencies": {
+    "playwright": "1.55.0"
+  }
+}

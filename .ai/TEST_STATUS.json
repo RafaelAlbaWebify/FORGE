@@ -1,0 +1,23 @@
+{
+  "last_run_date": "2026-09-05",
+  "tested_commit": null,
+  "tested_version": "0.10.0",
+  "git_available": false,
+  "suites": [
+    {"name": "Python unittest", "command": "python -m unittest discover -s tests -v", "passed": 50, "failed": 0, "skipped": 0, "status": "pass"},
+    {"name": "Python syntax", "command": "python -m py_compile forge_app.py", "status": "pass"},
+    {"name": "JavaScript syntax", "command": "node --check static/app.js", "status": "pass"},
+    {"name": "Playwright UI smoke", "command": "node tests/ui_smoke.js", "status": "not_run", "reason": "Chromium download failed with timeout/truncated archive"}
+  ],
+  "manual_acceptance": {
+    "clean_temp_server_api": "pass",
+    "copied_database_migration": "pass",
+    "windows_0_9_1_install": "not_run",
+    "multi_viewport_visual_review": "not_run",
+    "backup_restore_drill": "not_run"
+  },
+  "untested_areas": ["actual Windows shortcut creation", "forced installer rollback", "browser layout at target viewports", "keyboard/accessibility flow", "large archive pagination"],
+  "known_flaky_tests": [],
+  "last_real_world_external_validation": null,
+  "interpretation": "Implemented features are not considered browser- or Windows-verified until the corresponding not_run entries pass."
+}

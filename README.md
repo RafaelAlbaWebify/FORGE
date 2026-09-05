@@ -49,4 +49,3 @@ Timers never award XP; validated outcomes do. Sustainability is separate from pr
 - Network: loopback only (`127.0.0.1`)
 
 No cloud account, API key or extra Python package is required. Python 3.10+ must be available.
-

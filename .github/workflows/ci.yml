@@ -1,0 +1,93 @@
+name: FORGE verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    name: Core and contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Python tests
+        run: python -m unittest discover -s tests -v
+      - name: Static syntax checks
+        run: |
+          python -m py_compile forge_app.py tools/build_ai_context.py tools/build_release.py
+          node --check static/app.js
+          node --check tests/ui_smoke.js
+      - name: Validate AI bootstrap
+        run: python tools/build_ai_context.py --run-tests
+      - name: Build privacy-safe release
+        run: python tools/build_release.py --output dist/FORGE_WINDOWS.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FORGE-Windows-${{ github.sha }}
+          path: dist/FORGE_WINDOWS.zip
+
+  browser:
+    name: Browser workflow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Start isolated FORGE
+        run: |
+          python forge_app.py --no-browser --port 8877 > forge-ci.log 2>&1 &
+          echo $! > forge-ci.pid
+          for attempt in {1..30}; do curl --fail --silent http://127.0.0.1:8877/api/identity && exit 0; sleep 1; done
+          cat forge-ci.log
+          exit 1
+      - name: Multi-viewport Playwright smoke
+        run: npm run test:ui
+        env:
+          FORGE_URL: http://127.0.0.1:8877
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-diagnostics-${{ github.sha }}
+          path: forge-ci.log
+
+  windows-runtime:
+    name: Windows runtime smoke
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tests
+        run: python -m unittest discover -s tests -v
+      - name: Start and verify identity
+        shell: pwsh
+        run: |
+          $process = Start-Process python -ArgumentList 'forge_app.py','--no-browser','--port','8877' -PassThru
+          try {
+            foreach ($attempt in 1..30) {
+              try {
+                $identity = Invoke-RestMethod 'http://127.0.0.1:8877/api/identity'
+                if ($identity.app -eq 'FORGE') { exit 0 }
+              } catch { Start-Sleep -Seconds 1 }
+            }
+            throw 'FORGE identity endpoint did not become ready.'
+          } finally {
+            Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+          }

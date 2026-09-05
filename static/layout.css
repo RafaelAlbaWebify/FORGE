@@ -1,0 +1,28 @@
+.metric{min-width:0}
+.metric span,.metric small{display:block;color:var(--muted)}
+.metric strong{display:block;font-size:24px;line-height:1.25;margin:3px 0}
+.metric small{min-height:18px;line-height:1.35}
+.mission{grid-template-columns:minmax(260px,1fr) minmax(175px,auto) minmax(260px,auto);gap:20px;padding:16px 18px}
+.timer-buttons{flex-wrap:nowrap;gap:6px}
+.timer-buttons button{padding:7px 10px;white-space:nowrap}
+.mission-outcome{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0}
+.status-pill{border:1px solid var(--line);border-radius:999px;padding:5px 9px;color:var(--muted);white-space:nowrap}
+.status-pill.completed{color:var(--green);border-color:#26795d}
+.status-pill.advanced{color:#67a0ff;border-color:#355d9d}
+.status-pill.blocked{color:#ff8092;border-color:#8f3444}
+.outcome-summary{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:210px}
+.finish-button{min-width:104px}
+button:disabled{cursor:not-allowed;opacity:.45}
+dialog{max-height:88vh;overflow:auto}
+.wide-dialog{width:min(980px,96vw)}
+.dialog-head{display:flex;justify-content:space-between;align-items:start;position:sticky;top:-1px;background:var(--panel);z-index:2;padding-bottom:8px}
+.dialog-head h2,.dialog-head p{margin:0 0 5px}
+.editor-section{margin:18px 0}
+.editor-row{display:grid;grid-template-columns:1.4fr .65fr .65fr 1.5fr auto;gap:8px;align-items:end;padding:10px 0;border-bottom:1px solid var(--line)}
+.editor-row label{margin:0}
+.editor-row input,.editor-row select{width:100%;background:#0a1325;border:1px solid var(--line);border-radius:8px;padding:9px}
+.archive-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px;border-bottom:1px solid var(--line)}
+.editor-actions{display:flex;gap:5px}.editor-actions button{padding:8px}.danger{color:#ff8092}
+@media(max-width:1000px){.mission{grid-template-columns:1fr auto}.mission-outcome{grid-column:1/-1;justify-content:flex-start}.outcome-summary{max-width:none}.editor-row{grid-template-columns:1fr 1fr}.editor-row>*:first-child{grid-column:1/-1}}
+@media(max-width:850px){.mission{grid-template-columns:1fr}.mission-outcome{grid-column:auto}.summary,.review-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.summary,.review-grid{grid-template-columns:1fr}.mission-outcome{align-items:stretch;flex-direction:column}.finish-button{width:100%}}
