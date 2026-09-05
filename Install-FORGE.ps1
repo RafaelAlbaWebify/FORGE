@@ -1,6 +1,7 @@
 param(
     [string]$InstallRoot = "",
     [string]$ShortcutPath = "",
+    [string]$ProcessIdPath = "",
     [switch]$NoBrowser
 )
 
@@ -109,7 +110,10 @@ $shortcut.Save()
 
 $launchArguments = @('"' + (Join-Path $installRoot "forge_app.py") + '"')
 if ($NoBrowser) { $launchArguments += "--no-browser" }
-Start-Process -FilePath $pythonPath -ArgumentList $launchArguments -WorkingDirectory $installRoot
+$launchedProcess = Start-Process -FilePath $pythonPath -ArgumentList $launchArguments -WorkingDirectory $installRoot -PassThru
+if ($ProcessIdPath) {
+    Set-Content -LiteralPath ([IO.Path]::GetFullPath($ProcessIdPath)) -Value $launchedProcess.Id -Encoding ASCII
+}
 
 $verifiedUrl = $null
 for ($attempt = 0; $attempt -lt 30 -and -not $verifiedUrl; $attempt++) {

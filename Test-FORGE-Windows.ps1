@@ -7,6 +7,7 @@ $install = Join-Path $sandbox "installed"
 $shortcut = Join-Path $sandbox "FORGE.lnk"
 $badSource = Join-Path $sandbox "bad-release"
 $database = Join-Path $install "data\forge.db"
+$processIdFile = Join-Path $sandbox "forge.pid"
 $marker = "acceptance-" + [guid]::NewGuid().ToString("N")
 $releaseFiles = @(
     "forge_app.py", "README.md", "VERSION.txt", "INSTALL_FORGE.bat",
@@ -15,6 +16,12 @@ $releaseFiles = @(
 )
 
 function Stop-AcceptanceForge {
+    if (Test-Path -LiteralPath $processIdFile) {
+        $launchedId = [int](Get-Content -LiteralPath $processIdFile -Raw)
+        Stop-Process -Id $launchedId -Force -ErrorAction SilentlyContinue
+        try { Wait-Process -Id $launchedId -Timeout 10 -ErrorAction SilentlyContinue } catch { }
+        Remove-Item -LiteralPath $processIdFile -Force -ErrorAction SilentlyContinue
+    }
     Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object {
         ($_.Name -in @("python.exe", "pythonw.exe")) -and $_.CommandLine -and
         $_.CommandLine.Contains((Join-Path $install "forge_app.py"))
@@ -23,7 +30,7 @@ function Stop-AcceptanceForge {
 
 function Invoke-Installer([string]$installerSource) {
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $installerSource "Install-FORGE.ps1") `
-        -InstallRoot $install -ShortcutPath $shortcut -NoBrowser
+        -InstallRoot $install -ShortcutPath $shortcut -ProcessIdPath $processIdFile -NoBrowser
     if ($LASTEXITCODE -ne 0) { throw "Installer returned exit code $LASTEXITCODE." }
 }
 
@@ -63,7 +70,7 @@ try {
     $badApp = Join-Path $badSource "forge_app.py"
     (Get-Content -LiteralPath $badApp -Raw).Replace('APP_VERSION = "0.10.0"', 'APP_VERSION = "0.0.0-acceptance-failure"') | Set-Content -LiteralPath $badApp -Encoding UTF8
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $badSource "Install-FORGE.ps1") `
-        -InstallRoot $install -ShortcutPath $shortcut -NoBrowser
+        -InstallRoot $install -ShortcutPath $shortcut -ProcessIdPath $processIdFile -NoBrowser
     if ($LASTEXITCODE -eq 0) { throw "The deliberately invalid upgrade unexpectedly succeeded." }
     $rolledBackMarker = & $python -c "import sqlite3,sys; c=sqlite3.connect(sys.argv[1]); print(c.execute('PRAGMA integrity_check').fetchone()[0]+'|'+c.execute('SELECT value FROM app_meta WHERE key=?',('acceptance_marker',)).fetchone()[0]); c.close()" $database
     if ($rolledBackMarker.Trim() -ne ("ok|" + $marker)) { throw "Rollback did not preserve the prior database." }
@@ -74,6 +81,9 @@ try {
 } finally {
     Stop-AcceptanceForge
     if (-not $KeepSandbox -and (Test-Path -LiteralPath $sandbox)) {
-        Remove-Item -LiteralPath $sandbox -Recurse -Force
+        for ($attempt = 0; $attempt -lt 10 -and (Test-Path -LiteralPath $sandbox); $attempt++) {
+            try { Remove-Item -LiteralPath $sandbox -Recurse -Force -ErrorAction Stop } catch { Start-Sleep -Milliseconds 300 }
+        }
+        if (Test-Path -LiteralPath $sandbox) { Write-Warning "Acceptance sandbox remains for inspection: $sandbox" }
     }
 }
