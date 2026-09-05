@@ -116,19 +116,26 @@ if ($ProcessIdPath) {
 }
 
 $verifiedUrl = $null
+$unexpectedVersion = $null
 for ($attempt = 0; $attempt -lt 30 -and -not $verifiedUrl; $attempt++) {
     Start-Sleep -Milliseconds 250
     foreach ($port in 8877..8896) {
         try {
             $identity = Invoke-RestMethod -Uri "http://127.0.0.1:$port/api/identity" -TimeoutSec 1
             $identityRoot = if ($identity.root) { [IO.Path]::GetFullPath([string]$identity.root) } else { "" }
-            if ($identity.app -eq "FORGE" -and $identity.version -eq "0.10.0" -and $identityRoot -eq $installRoot) {
-                $verifiedUrl = "http://127.0.0.1:$port"
+            if ($identity.app -eq "FORGE" -and $identityRoot -eq $installRoot) {
+                if ($identity.version -eq "0.10.0") {
+                    $verifiedUrl = "http://127.0.0.1:$port"
+                } else {
+                    $unexpectedVersion = [string]$identity.version
+                }
                 break
             }
         } catch { }
     }
+    if ($unexpectedVersion) { break }
 }
+if ($unexpectedVersion) { throw "FORGE started from the expected installation folder but reported version '$unexpectedVersion' instead of '0.10.0'." }
 if (-not $verifiedUrl) { throw "FORGE was copied but version 0.10.0 did not start correctly." }
 
 if ($preState) {
