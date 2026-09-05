@@ -311,6 +311,19 @@ class ForgeTests(unittest.TestCase):
         edited = next(m for m in app.day_payload("2026-08-27")["missions"] if m["id"] == mission["id"])
         self.assertEqual((edited["title"], edited["area"], edited["priority"], edited["progress_after"], edited["score_weight"]), ("Edited mission", "veridra", "parallel", 42, 17))
 
+    def test_advanced_editor_exposes_all_user_owned_fields(self):
+        javascript = (Path(__file__).parents[1] / "static" / "app.js").read_text(encoding="utf-8")
+        mission_fields = {"title", "priority", "best_time", "suggested_minutes", "status", "result",
+                          "next_action", "progress_before", "progress_after", "score_weight", "sort_order",
+                          "area", "project_id", "milestone_id", "success_evidence", "resume_location",
+                          "blocker_reason", "blocker_active", "if_then_cue"}
+        project_fields = {"name", "area", "objective", "next_action", "priority_rank"}
+        milestone_fields = {"title", "weight", "progress", "status", "evidence", "sort_order",
+                            "confidence", "completion_conditions"}
+        for field in mission_fields | project_fields | milestone_fields:
+            self.assertIn(f'data-field="{field}"', javascript)
+        self.assertNotIn('data-field="active"', javascript)  # Archive/restore owns lifecycle state.
+
     def test_project_and_milestone_fields_are_editable(self):
         project = app.projects_payload()[0]; milestone = project["milestones"][0]
         project_fields = app.normalize_project_fields({"name": "Edited project", "area": "webify", "objective": "Edited objective", "next_action": "Edited action"})
