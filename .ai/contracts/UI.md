@@ -8,4 +8,4 @@ Advanced structure editing, archive/restore and backup remain available under th
 
 Guarantees: no icon-only status ambiguity; no horizontal overflow at supported viewports; timer state survives reload; fields do not expand due to timer clicks; computed values are not presented as manually editable facts.
 
-Current limitation: these layout guarantees are specified but await an executed Playwright run. See `KNOWN_ISSUES.md`.
+Verification: the daily workflow and complete advanced editor pass automated interaction and horizontal-overflow checks at 1920×1080, 1366×768, 820×1000 and 390×844. Human Windows visual/accessibility acceptance remains separate.
