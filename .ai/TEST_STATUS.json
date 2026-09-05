@@ -1,10 +1,10 @@
 {
   "last_run_date": "2026-09-05",
-  "tested_commit": "e6f9a3a626eaba1b1655059ff36137c91480327a",
+  "tested_commit": "8b166dec46841e6d2d2f7a115746f9972ef2270a",
   "tested_version": "0.10.0",
   "git_available": true,
   "suites": [
-    {"name": "Python unittest", "command": "python -m unittest discover -s tests -v", "passed": 52, "failed": 0, "skipped": 0, "status": "pass", "platforms": ["ubuntu-latest", "windows-latest"]},
+    {"name": "Python unittest", "command": "python -m unittest discover -s tests -v", "passed": 54, "failed": 0, "skipped": 0, "status": "pass", "platforms": ["ubuntu-latest", "windows-latest"]},
     {"name": "Python syntax", "command": "python -m py_compile forge_app.py", "status": "pass"},
     {"name": "JavaScript syntax", "command": "node --check static/app.js", "status": "pass"},
     {"name": "Playwright UI smoke", "command": "node tests/ui_smoke.js", "status": "pass", "viewports": ["1920x1080", "1366x768", "820x1000", "390x844"], "environment": "GitHub ubuntu-latest Chromium"}
@@ -14,10 +14,10 @@
     "copied_database_migration": "pass",
     "windows_0_9_1_install": "not_run",
     "multi_viewport_visual_review": "automated interaction and overflow checks pass; human visual review pending",
-    "backup_restore_drill": "not_run"
+    "backup_restore_drill": "pass on windows-latest disposable installation"
   },
-  "untested_areas": ["actual Windows shortcut creation", "forced installer rollback", "human visual review", "keyboard/accessibility flow", "large archive pagination"],
+  "untested_areas": ["Rafael's actual Windows shortcut launch", "human visual review", "keyboard/accessibility flow", "large archive pagination"],
   "known_flaky_tests": [],
   "last_real_world_external_validation": null,
-  "interpretation": "Core behavior now passes on Linux and Windows, and the primary browser workflow passes at four viewports. Installer/upgrade, restore and human accessibility acceptance remain separate gates."
+  "interpretation": "Core, browser and isolated Windows install/upgrade/restore/rollback behavior pass. Rafael's real installation, visual review and human accessibility acceptance remain separate gates."
 }

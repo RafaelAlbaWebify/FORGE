@@ -1,20 +1,19 @@
 # Generated FORGE Context
 
-Generated: 2026-09-05T05:49:35+00:00
+Generated: 2026-09-05T06:18:36+00:00
 Version: 0.10.0
 Git repository: True
 
-Current milestone: Verify the 0.10.0 install, upgrade, shortcut and restore workflows on a real Windows machine
+Current milestone: Run the 0.10.0 release on Rafael's Windows installation and verify the real Desktop shortcut and retained records
 
 ## Blockers
 
-- Fresh 0.10.0 Windows install/upgrade and human visual acceptance are not yet evidenced
-- A complete backup-to-restore drill has not yet been executed
+- Rafael's real 0.10.0 install/upgrade, Desktop shortcut and human visual acceptance are not yet evidenced
 
 ## Next actions
 
-- Execute a fresh 0.10.0 install and upgrade on the user's Windows machine, retaining data and validating the shortcut
-- Perform and document a backup-to-restore drill
+- Install the verified 0.10.0 release on Rafael's Windows machine and confirm the real Desktop shortcut opens the retained data
+- Perform a short human Chrome visual and keyboard check
 - Only then reassess internal-testing readiness
 
 ## Test invocation

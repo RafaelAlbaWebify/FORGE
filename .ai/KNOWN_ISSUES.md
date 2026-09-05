@@ -26,10 +26,10 @@
 - Severity: P1
 - Module: packaging
 - Status: open
-- Description: current installer logic is tested indirectly and version/API checked, but 0.10.0 has not been freshly installed/upgraded in a clean Windows environment during this audit.
+- Description: automated 0.10.0 clean install, shortcut targeting, upgrade, restore and forced rollback pass on `windows-latest`; Rafael's real installation and Desktop shortcut still require human confirmation.
 - Workaround: installer rollback and preserved-folder logic reduce risk.
 - Blocking effect: production-ready gate remains closed.
-- Next action: execute clean install, 0.9.1→0.10.0 upgrade and forced rollback test.
+- Next action: install the verified release on Rafael's PC, open it from the real Desktop shortcut and confirm existing records remain visible.
 
 ## FORGE-004 — Frontend maintainability debt
 
@@ -55,10 +55,10 @@
 
 - Severity: P1
 - Module: persistence/packaging
-- Status: open
+- Status: resolved 2026-09-05
 - Description: backup creation and installer rollback paths have tests/code checks, but a complete operator-driven restore drill is not documented.
-- Blocking effect: production-ready gate remains closed.
-- Next action: restore a verified backup into a disposable install and compare counts/integrity.
+- Resolution evidence: Actions run 33949201547 copied a verified backup into a disposable restore target and confirmed SQLite integrity plus the seeded preservation marker.
+- Follow-up: retain the operator-facing restore path in release acceptance.
 
 ## FORGE-007 — Archive listing is capped
 

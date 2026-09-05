@@ -1,22 +1,21 @@
 {
-  "generated_at": "2026-09-05T05:49:35+00:00",
+  "generated_at": "2026-09-05T06:18:36+00:00",
   "project": "FORGE",
   "version": "0.10.0",
   "git": {
     "is_repository": true,
-    "branch": "fix/advanced-editor-parity",
-    "commit": "ff8576cc4c7340d2d20246edd69581cd1b140632",
-    "status": " M .ai/BOOTSTRAP_VALIDATION.md\n M .ai/CONTEXT.md\n M .ai/FILE_MAP.md\n M .ai/KNOWN_ISSUES.md\n M .ai/OPERABILITY.md\n M .ai/PROJECT_STATE.json\n M .ai/ROADMAP.md\n M .ai/TEST_STATUS.json\n M .ai/contracts/UI.md\n"
+    "branch": "feat/windows-acceptance",
+    "commit": "d0cec6cc37f90b733168d723df9a488e26c9053f",
+    "status": " M .ai/CONTEXT.md\n M .ai/KNOWN_ISSUES.md\n M .ai/OPERABILITY.md\n M .ai/PROJECT_STATE.json\n M .ai/ROADMAP.md\n M .ai/TEST_STATUS.json\n"
   },
-  "current_phase": "Windows installation acceptance and restore verification",
-  "current_milestone": "Verify the 0.10.0 install, upgrade, shortcut and restore workflows on a real Windows machine",
+  "current_phase": "Human Windows acceptance and release hardening",
+  "current_milestone": "Run the 0.10.0 release on Rafael's Windows installation and verify the real Desktop shortcut and retained records",
   "blockers": [
-    "Fresh 0.10.0 Windows install/upgrade and human visual acceptance are not yet evidenced",
-    "A complete backup-to-restore drill has not yet been executed"
+    "Rafael's real 0.10.0 install/upgrade, Desktop shortcut and human visual acceptance are not yet evidenced"
   ],
   "next_actions": [
-    "Execute a fresh 0.10.0 install and upgrade on the user's Windows machine, retaining data and validating the shortcut",
-    "Perform and document a backup-to-restore drill",
+    "Install the verified 0.10.0 release on Rafael's Windows machine and confirm the real Desktop shortcut opens the retained data",
+    "Perform a short human Chrome visual and keyboard check",
     "Only then reassess internal-testing readiness"
   ],
   "readiness": {
@@ -58,6 +57,7 @@
     "README.md",
     "START_FORGE.bat",
     "Start-FORGE.ps1",
+    "Test-FORGE-Windows.ps1",
     "VERSION.txt",
     "forge_app.py",
     "node_modules/.bin/playwright",
@@ -254,7 +254,7 @@
     "command": "python -m unittest discover -s tests",
     "exit_code": 0,
     "stdout": "",
-    "stderr": "....................................................\n----------------------------------------------------------------------\nRan 52 tests in 0.574s\n\nOK\n"
+    "stderr": "......................................................\n----------------------------------------------------------------------\nRan 54 tests in 0.559s\n\nOK\n"
   },
   "notice": "Generated evidence only. Decisions, issues and historical ledgers remain manually maintained."
 }
