@@ -2,11 +2,11 @@
 
 ## Current state
 
-**Development usable: PASS. Internal testing ready: FAIL. External testing ready: FAIL. Real prospect ready: FAIL/not applicable to the current personal-tool boundary. Production ready: FAIL.**
+**Development usable: PASS. Internal testing ready: PASS. External testing ready: FAIL. Real prospect ready: FAIL/not applicable to the current personal-tool boundary. Production ready: FAIL.**
 
-The current operability estimate is **86%**. Core behavior, complete advanced editing, automated Windows install/upgrade/restore/rollback acceptance, and Rafael's real-machine installation/database/runtime identity checks pass. The remaining acceptance gap is human confirmation that retained records render correctly in the browser plus a short visual/keyboard accessibility check.
+The current operability estimate is **90%**. Core behavior, complete advanced editing, cross-platform CI, automated Windows install/upgrade/restore/rollback acceptance, and Rafael's real-machine installation/database/runtime/browser acceptance all pass. The next gate is release hardening: export privacy/minimisation, manual recovery messaging, clean-user installation instructions and repeatable release provenance.
 
-Local Git, privacy exclusions and GitHub CI definitions are present and cross-platform CI has passed. Runtime data remains local-only and outside Git.
+Local Git, privacy exclusions and GitHub CI are present. Runtime data remains local-only and outside Git.
 
 ## Development usable — PASS
 
@@ -16,7 +16,7 @@ Local Git, privacy exclusions and GitHub CI definitions are present and cross-pl
 - [x] No unresolved P0 issue.
 - [x] Project bootstrap and module contracts exist.
 
-## Internal testing ready — FAIL
+## Internal testing ready — PASS
 
 - [x] Development usable passes.
 - [x] 54 Python tests pass on Linux and Windows.
@@ -27,15 +27,15 @@ Local Git, privacy exclusions and GitHub CI definitions are present and cross-pl
 - [x] Rafael's real installation is FORGE 0.10.0 at `%LOCALAPPDATA%\FORGE`; the Desktop shortcut targets the installed `forge_app.py`.
 - [x] Rafael's real `forge.db` reports SQLite integrity `ok` with 100 missions, 22 timer sessions, 19 time adjustments, 6 projects, 30 milestones and 0 daily notes.
 - [x] A running real-machine instance reports app `FORGE`, version `0.10.0`, and root `C:\Users\ralba\AppData\Local\FORGE` through `/api/identity`.
-- [ ] Human browser confirmation shows retained missions/projects/history correctly and a short keyboard/visual check passes.
+- [x] Rafael confirmed retained data is visible and Today, Map, Review and keyboard focus all look correct in the real browser.
 
 ## External beta/testing ready — FAIL
 
-- [ ] Internal testing ready passes.
+- [x] Internal testing ready passes.
 - [x] Backup restoration drill passes in a disposable Windows target.
 - [ ] Error messages and recovery are manually verified.
 - [ ] Installation instructions are validated by a clean user path.
-- [ ] Privacy boundaries and exported snapshot contents are reviewed.
+- [ ] Privacy boundaries and exported snapshot contents are reviewed and minimised.
 
 ## Real prospect ready — FAIL / currently outside product boundary
 
