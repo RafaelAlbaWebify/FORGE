@@ -3,16 +3,14 @@
   "version": "0.10.0",
   "last_updated": "2026-09-06",
   "git": {"is_repository": true, "commit": null, "branch": "main", "remote": "https://github.com/RafaelAlbaWebify/FORGE", "visibility": "public"},
-  "current_phase": "Human Windows acceptance and release hardening",
-  "current_milestone": "Complete the final human visual and keyboard acceptance on Rafael's real Windows installation",
-  "overall_completion_percent": 88,
-  "operability_percent": 86,
+  "current_phase": "Release hardening",
+  "current_milestone": "Verify and minimise the portable AI snapshot privacy boundary",
+  "overall_completion_percent": 90,
+  "operability_percent": 90,
   "testing_percent": 95,
-  "current_blockers": [
-    "Human visual confirmation that retained missions/projects/history render correctly, plus a short keyboard/accessibility check, is still not evidenced"
-  ],
+  "current_blockers": [],
   "known_critical_failures": [],
-  "active_workstreams": ["Human Windows acceptance", "release verification", "accessibility acceptance"],
+  "active_workstreams": ["AI snapshot privacy/minimisation", "release verification", "recovery and installation acceptance"],
   "completed_milestones": [
     "Crash-safe focus timer with pause/resume/manual correction",
     "SQLite backups and installer rollback path",
@@ -23,20 +21,24 @@
     "Hosted Linux, Windows and four-viewport Chromium verification",
     "Complete advanced-editor parity for user-owned fields",
     "Automated Windows clean-install, upgrade, shortcut, restore and rollback acceptance",
-    "Real Windows 0.10.0 installation, shortcut target, database integrity and running-root identity verification"
+    "Real Windows 0.10.0 installation, shortcut target, database integrity and running-root identity verification",
+    "Human real-browser retention, visual layout and keyboard-focus acceptance"
   ],
   "pending_milestones": [
-    "Human visual and keyboard acceptance on the real Windows installation",
+    "AI snapshot privacy and data-minimisation acceptance",
+    "Manual recovery/error-message acceptance",
+    "Clean-user installation instruction validation",
+    "Repeatable release checklist and version provenance",
     "Consolidated maintainable frontend source"
   ],
   "next_recommended_actions": [
-    "Confirm in the real browser that retained missions, projects and history are visible and correct",
-    "Perform a short keyboard navigation and visual-layout check on Today, Map and Review",
-    "Then reassess internal-testing readiness and move to release-hardening items only if acceptance passes"
+    "Review the exact forge-snapshot 2.0 fields against the AI exchange contract and remove unnecessary local bookkeeping data",
+    "Add regression tests for snapshot privacy/minimisation",
+    "Then verify recovery messaging and the clean-user installation path"
   ],
   "readiness": {
     "development_ready": true,
-    "internal_testing_ready": false,
+    "internal_testing_ready": true,
     "external_testing_ready": false,
     "real_prospect_ready": false,
     "production_ready": false
@@ -59,7 +61,7 @@
       "database_integrity": "ok",
       "record_counts": {"missions": 100, "timer_sessions": 22, "time_adjustments": 19, "projects": 6, "milestones": 30, "daily_notes": 0},
       "runtime_identity": {"app": "FORGE", "version": "0.10.0", "root": "C:\\Users\\ralba\\AppData\\Local\\FORGE"},
-      "human_visual_acceptance": "pending"
+      "human_visual_acceptance": "pass; retained data visible, Today/Map/Review look correct, keyboard focus works"
     }
   }
 }
