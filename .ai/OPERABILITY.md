@@ -4,7 +4,7 @@
 
 **Development usable: PASS. Internal testing ready: PASS. External testing ready: FAIL. Real prospect ready: FAIL/not applicable to the current personal-tool boundary. Production ready: FAIL.**
 
-The current operability estimate is **92%**. Core behavior, complete advanced editing, cross-platform CI, automated Windows install/upgrade/restore/rollback acceptance, Rafael's real-machine installation/database/runtime/browser acceptance, and the AI snapshot privacy boundary all pass. Remaining release-hardening gates are manual recovery messaging, clean-user installation instructions and repeatable release provenance.
+The current operability estimate is **94%**. Core behavior, complete advanced editing, cross-platform CI, automated Windows install/upgrade/restore/rollback acceptance, Rafael's real-machine installation/database/runtime/browser acceptance, the AI snapshot privacy boundary, and manual recovery/error-message acceptance all pass. The remaining external-testing gate is clean-user installation instruction validation. Production hardening still requires release provenance and the other production gates below.
 
 Local Git, privacy exclusions and GitHub CI are present. Runtime data remains local-only and outside Git. AI snapshots are explicitly treated as private, non-anonymised working data.
 
@@ -33,7 +33,7 @@ Local Git, privacy exclusions and GitHub CI are present. Runtime data remains lo
 
 - [x] Internal testing ready passes.
 - [x] Backup restoration drill passes in a disposable Windows target.
-- [ ] Error messages and recovery are manually verified.
+- [x] Error messages and recovery are manually verified: on 2026-09-06 a deliberately invalid upgrade reported `Upgrade failed; the previous FORGE version and database were restored.`, preserved the seeded database marker, restored the prior 0.10.0 application, and the isolated harness ended `[5/5] PASS - install, shortcut, upgrade, backup/restore and rollback`.
 - [ ] Installation instructions are validated by a clean user path.
 - [x] Privacy boundaries and exported snapshot contents are reviewed and accepted for the current single-user scope: detailed history is bounded to fourteen days, older history is aggregated, raw database/backups/install paths/server identity/raw timer-session records are excluded, and user-entered free text is explicitly documented as private and non-anonymised.
 
