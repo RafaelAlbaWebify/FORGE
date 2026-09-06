@@ -3,14 +3,14 @@
   "version": "0.10.0",
   "last_updated": "2026-09-06",
   "git": {"is_repository": true, "commit": null, "branch": "main", "remote": "https://github.com/RafaelAlbaWebify/FORGE", "visibility": "public"},
-  "current_phase": "Release hardening",
-  "current_milestone": "Validate the clean-user installation instruction path",
-  "overall_completion_percent": 94,
-  "operability_percent": 94,
+  "current_phase": "Operative / maintenance",
+  "current_milestone": "Personal single-user operability complete",
+  "overall_completion_percent": 100,
+  "operability_percent": 100,
   "testing_percent": 96,
   "current_blockers": [],
   "known_critical_failures": [],
-  "active_workstreams": ["clean-user installation validation", "release provenance"],
+  "active_workstreams": ["maintenance backlog", "optional distribution hardening"],
   "completed_milestones": [
     "Crash-safe focus timer with pause/resume/manual correction",
     "SQLite backups and installer rollback path",
@@ -24,25 +24,30 @@
     "Real Windows 0.10.0 installation, shortcut target, database integrity and running-root identity verification",
     "Human real-browser retention, visual layout and keyboard-focus acceptance",
     "AI snapshot privacy boundary review and explicit non-anonymised-data documentation",
-    "Manual Windows recovery/error-message acceptance with verified rollback and preserved database marker"
+    "Manual Windows recovery/error-message acceptance with verified rollback and preserved database marker",
+    "Personal single-user operability accepted at 100 percent"
   ],
-  "pending_milestones": [
-    "Clean-user installation instruction validation",
-    "Repeatable release checklist and version provenance",
-    "Consolidated maintainable frontend source"
+  "pending_milestones": [],
+  "optional_future_work": [
+    "Clean-user installation instruction validation if FORGE is distributed externally",
+    "Repeatable public release checklist and version provenance if external distribution is needed",
+    "Consolidated maintainable frontend source",
+    "Deprecate unused tomorrow-planning API paths",
+    "Archive pagination if real dataset volume approaches current caps"
   ],
   "next_recommended_actions": [
-    "Validate the README install path exactly as a clean user would from a freshly built release ZIP in a disposable Windows target",
-    "If that passes, mark external testing ready and formalise the release checklist and provenance record",
-    "Then close the remaining production-readiness gates and consolidate the frontend source"
+    "Use FORGE normally for daily work and only fix issues that materially affect real use",
+    "Treat frontend modularisation and release-distribution hardening as optional maintenance, not operability blockers"
   ],
   "readiness": {
+    "personal_operability_ready": true,
     "development_ready": true,
     "internal_testing_ready": true,
     "external_testing_ready": false,
     "real_prospect_ready": false,
     "production_ready": false
   },
+  "scope_note": "100% refers to the intended private local single-user FORGE boundary. External distribution/commercial readiness is a separate track and does not reduce personal operability.",
   "last_verified_evidence": {
     "date": "2026-09-06",
     "python_tests": {"passed": 54, "failed": 0, "platforms": ["Linux", "Windows"]},
@@ -50,7 +55,6 @@
     "api_smoke": "pass on clean temporary instance",
     "database_migration_copy": "pass; SQLite integrity_check=ok",
     "playwright": "pass in hosted Chromium at 1920x1080, 1366x768, 820x1000 and 390x844",
-    "github_actions": "all three jobs pass on head 8b166dec46841e6d2d2f7a115746f9972ef2270a (run 33949201547); merged as e53acfcabf6cd9bfd42971cf9171f84942d69ee5",
     "windows_runtime": "54 tests, loopback identity and isolated installer acceptance pass on windows-latest",
     "windows_installer": "automated clean install, shortcut target, data-preserving upgrade, backup restore and forced rollback pass",
     "manual_recovery_acceptance": "pass on 2026-09-06; invalid 0.0.0-acceptance-failure upgrade produced clear rollback message, restored prior 0.10.0 application and database marker, and completed the five-stage isolated Windows acceptance harness",
