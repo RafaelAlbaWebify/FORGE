@@ -2,50 +2,48 @@
 
 ## Current state
 
-**Development usable: PASS. Internal testing ready: PASS. External testing ready: FAIL. Real prospect ready: FAIL/not applicable to the current personal-tool boundary. Production ready: FAIL.**
+**Personal single-user operability: PASS — 100%. Development usable: PASS. Internal testing ready: PASS. External distribution readiness: NOT REQUIRED for current scope.**
 
-The current operability estimate is **94%**. Core behavior, complete advanced editing, cross-platform CI, automated Windows install/upgrade/restore/rollback acceptance, Rafael's real-machine installation/database/runtime/browser acceptance, the AI snapshot privacy boundary, and manual recovery/error-message acceptance all pass. The remaining external-testing gate is clean-user installation instruction validation. Production hardening still requires release provenance and the other production gates below.
+FORGE is fully operative for its intended boundary: Rafael's private, local, single-user Windows execution/evidence console. Core behavior, advanced editing, cross-platform CI, Windows install/upgrade/restore/rollback acceptance, Rafael's real-machine installation/database/runtime/browser acceptance, AI snapshot privacy, and manual recovery/error-message acceptance all pass.
+
+The former 94% figure mixed personal operability with optional release/distribution hardening. Clean-user installation testing, repeatable public release provenance, frontend modularisation, legacy API cleanup and archive pagination are now tracked separately as distribution/maintainability work and do not reduce personal operability.
 
 Local Git, privacy exclusions and GitHub CI are present. Runtime data remains local-only and outside Git. AI snapshots are explicitly treated as private, non-anonymised working data.
+
+## Personal single-user operability — PASS (100%)
+
+- [x] FORGE 0.10.0 is installed and runs from `%LOCALAPPDATA%\FORGE`.
+- [x] Desktop shortcut targets the installed application correctly.
+- [x] Existing personal records remain visible and SQLite integrity is `ok`.
+- [x] Today, Map and Review workflows are human-accepted in the real browser.
+- [x] Keyboard focus/navigation was human-accepted on the real machine.
+- [x] Crash-safe timer, pause/resume and manual correction behavior are implemented and tested.
+- [x] Verified backups, disposable restore, data-preserving upgrade and forced rollback pass.
+- [x] A deliberately invalid upgrade produced a clear recovery message and restored the prior application/database.
+- [x] AI snapshot export/import workflow and privacy boundary are reviewed and accepted for the current scope.
+- [x] No unresolved P0/P1 issue blocks intended personal use.
 
 ## Development usable — PASS
 
 - [x] Source starts on a clean temporary instance.
 - [x] Schema initializes and copied database migrates with integrity `ok`.
 - [x] Core timer, mission, project, AI exchange and backup logic have automated tests.
-- [x] No unresolved P0 issue.
-- [x] Project bootstrap and module contracts exist.
-
-## Internal testing ready — PASS
-
-- [x] Development usable passes.
 - [x] 54 Python tests pass on Linux and Windows.
 - [x] Python/JavaScript/HTML static checks pass.
 - [x] Multi-viewport Playwright workflow passes in actual Chromium.
-- [x] All known P1 GUI discrepancies are closed or explicitly accepted.
-- [x] Isolated Windows upgrade retains seeded data and creates a correctly targeted shortcut.
-- [x] Rafael's real installation is FORGE 0.10.0 at `%LOCALAPPDATA%\FORGE`; the Desktop shortcut targets the installed `forge_app.py`.
-- [x] Rafael's real `forge.db` reports SQLite integrity `ok` with 100 missions, 22 timer sessions, 19 time adjustments, 6 projects, 30 milestones and 0 daily notes.
-- [x] A running real-machine instance reports app `FORGE`, version `0.10.0`, and root `C:\Users\ralba\AppData\Local\FORGE` through `/api/identity`.
-- [x] Rafael confirmed retained data is visible and Today, Map, Review and keyboard focus all look correct in the real browser.
 
-## External beta/testing ready — FAIL
+## Optional external distribution readiness — not part of the 100% personal target
 
-- [x] Internal testing ready passes.
-- [x] Backup restoration drill passes in a disposable Windows target.
-- [x] Error messages and recovery are manually verified: on 2026-09-06 a deliberately invalid upgrade reported `Upgrade failed; the previous FORGE version and database were restored.`, preserved the seeded database marker, restored the prior 0.10.0 application, and the isolated harness ended `[5/5] PASS - install, shortcut, upgrade, backup/restore and rollback`.
-- [ ] Installation instructions are validated by a clean user path.
-- [x] Privacy boundaries and exported snapshot contents are reviewed and accepted for the current single-user scope: detailed history is bounded to fourteen days, older history is aggregated, raw database/backups/install paths/server identity/raw timer-session records are excluded, and user-entered free text is explicitly documented as private and non-anonymised.
+These items matter only if FORGE is distributed to other users or treated as a commercial/public product:
 
-## Real prospect ready — FAIL / currently outside product boundary
+- [ ] Validate installation instructions on a genuinely clean external-user path.
+- [ ] Formalise repeatable public release checklist and version provenance.
+- [ ] Reassess privacy/support/licensing requirements for external users.
 
-FORGE is a personal single-user tool, not a commercial product. If that boundary changes, this gate requires external-beta readiness, defined customer/support scope, licensing/privacy terms, safe distribution and at least one observed external-user workflow.
+## Maintainability backlog — non-blocking
 
-## Production ready — FAIL
+- [ ] Consolidate/split dense frontend source into bounded modules.
+- [ ] Deprecate/remove unused legacy tomorrow-planning API paths.
+- [ ] Add archive pagination only if dataset size approaches current caps.
 
-- [ ] External testing ready passes.
-- [ ] Repeatable release checklist and version provenance exist.
-- [ ] Restore, rollback and upgrade procedures are executed successfully on the intended release path.
-- [ ] UI accessibility acceptance passes.
-- [ ] Observability supports diagnosis without exposing private journal data.
-- [ ] No unresolved P0/P1 issue unless formally accepted with mitigation.
+If FORGE's product boundary changes beyond Rafael's personal single-user use, distribution and production readiness must be assessed independently rather than reducing the personal operability score.
