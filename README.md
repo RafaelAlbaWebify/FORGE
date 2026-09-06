@@ -28,12 +28,14 @@ For an isolated Windows acceptance test that does not alter the real installatio
 1. Work from **NOW**, with at most two human-focus actions in **NEXT**. JOLT and VERIDRA remain compact in **BACKGROUND**.
 2. Use **Start**, **Pause**, and **Finish**. Closing FORGE cannot erase measured work; interrupted sessions reopen paused at the last heartbeat.
 3. On Finish, record one short result and tap Not started, Advanced, Completed, or Blocked. Blocker, evidence, next action, and study recall are contextual or optional.
-4. Select **AI snapshot**, upload the JSON to the FORGE planning chat, and import the returned AI plan.
+4. Select **AI snapshot**, review the JSON if needed, upload it to the FORGE planning chat, and import the returned AI plan.
 5. Review the visual before/after changes and apply selected or all safe changes.
 
 ## AI snapshot
 
 The self-contained snapshot includes embedded instructions and the exact return schema, current work and evidence, fourteen detailed days, compact older aggregates, planning constraints, study reviews and planning decisions. Stable IDs and timestamps protect imports against stale or repeated changes.
+
+The snapshot is **private working data, not an anonymised export**. User-entered results, blockers, reflections, project evidence, study recall and planning decisions may appear verbatim. It excludes the database and backup files, installation paths, server identity and raw timer-session records/timestamps, but free-text fields can still contain sensitive information the user entered. Review a snapshot before sharing it outside the intended planning chat and never store credentials or secrets in FORGE.
 
 ## Views
 

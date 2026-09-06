@@ -4,13 +4,13 @@
   "last_updated": "2026-09-06",
   "git": {"is_repository": true, "commit": null, "branch": "main", "remote": "https://github.com/RafaelAlbaWebify/FORGE", "visibility": "public"},
   "current_phase": "Release hardening",
-  "current_milestone": "Verify and minimise the portable AI snapshot privacy boundary",
-  "overall_completion_percent": 90,
-  "operability_percent": 90,
+  "current_milestone": "Verify manual recovery/error messaging and the clean-user installation path",
+  "overall_completion_percent": 92,
+  "operability_percent": 92,
   "testing_percent": 95,
   "current_blockers": [],
   "known_critical_failures": [],
-  "active_workstreams": ["AI snapshot privacy/minimisation", "release verification", "recovery and installation acceptance"],
+  "active_workstreams": ["recovery/error-message acceptance", "clean-user installation validation", "release provenance"],
   "completed_milestones": [
     "Crash-safe focus timer with pause/resume/manual correction",
     "SQLite backups and installer rollback path",
@@ -22,19 +22,19 @@
     "Complete advanced-editor parity for user-owned fields",
     "Automated Windows clean-install, upgrade, shortcut, restore and rollback acceptance",
     "Real Windows 0.10.0 installation, shortcut target, database integrity and running-root identity verification",
-    "Human real-browser retention, visual layout and keyboard-focus acceptance"
+    "Human real-browser retention, visual layout and keyboard-focus acceptance",
+    "AI snapshot privacy boundary review and explicit non-anonymised-data documentation"
   ],
   "pending_milestones": [
-    "AI snapshot privacy and data-minimisation acceptance",
     "Manual recovery/error-message acceptance",
     "Clean-user installation instruction validation",
     "Repeatable release checklist and version provenance",
     "Consolidated maintainable frontend source"
   ],
   "next_recommended_actions": [
-    "Review the exact forge-snapshot 2.0 fields against the AI exchange contract and remove unnecessary local bookkeeping data",
-    "Add regression tests for snapshot privacy/minimisation",
-    "Then verify recovery messaging and the clean-user installation path"
+    "Exercise user-visible recovery and installer failure messages without endangering the real database",
+    "Validate the README install path against a clean disposable Windows target",
+    "Then formalise the release checklist and provenance record"
   ],
   "readiness": {
     "development_ready": true,
@@ -62,6 +62,7 @@
       "record_counts": {"missions": 100, "timer_sessions": 22, "time_adjustments": 19, "projects": 6, "milestones": 30, "daily_notes": 0},
       "runtime_identity": {"app": "FORGE", "version": "0.10.0", "root": "C:\\Users\\ralba\\AppData\\Local\\FORGE"},
       "human_visual_acceptance": "pass; retained data visible, Today/Map/Review look correct, keyboard focus works"
-    }
+    },
+    "ai_snapshot_privacy": "pass for current single-user scope; bounded 14-day detail, older aggregates, no database/backups/install paths/server identity/raw timer sessions; free text explicitly documented as private and non-anonymised"
   }
 }

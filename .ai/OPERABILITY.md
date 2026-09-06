@@ -4,9 +4,9 @@
 
 **Development usable: PASS. Internal testing ready: PASS. External testing ready: FAIL. Real prospect ready: FAIL/not applicable to the current personal-tool boundary. Production ready: FAIL.**
 
-The current operability estimate is **90%**. Core behavior, complete advanced editing, cross-platform CI, automated Windows install/upgrade/restore/rollback acceptance, and Rafael's real-machine installation/database/runtime/browser acceptance all pass. The next gate is release hardening: export privacy/minimisation, manual recovery messaging, clean-user installation instructions and repeatable release provenance.
+The current operability estimate is **92%**. Core behavior, complete advanced editing, cross-platform CI, automated Windows install/upgrade/restore/rollback acceptance, Rafael's real-machine installation/database/runtime/browser acceptance, and the AI snapshot privacy boundary all pass. Remaining release-hardening gates are manual recovery messaging, clean-user installation instructions and repeatable release provenance.
 
-Local Git, privacy exclusions and GitHub CI are present. Runtime data remains local-only and outside Git.
+Local Git, privacy exclusions and GitHub CI are present. Runtime data remains local-only and outside Git. AI snapshots are explicitly treated as private, non-anonymised working data.
 
 ## Development usable — PASS
 
@@ -35,7 +35,7 @@ Local Git, privacy exclusions and GitHub CI are present. Runtime data remains lo
 - [x] Backup restoration drill passes in a disposable Windows target.
 - [ ] Error messages and recovery are manually verified.
 - [ ] Installation instructions are validated by a clean user path.
-- [ ] Privacy boundaries and exported snapshot contents are reviewed and minimised.
+- [x] Privacy boundaries and exported snapshot contents are reviewed and accepted for the current single-user scope: detailed history is bounded to fourteen days, older history is aggregated, raw database/backups/install paths/server identity/raw timer-session records are excluded, and user-entered free text is explicitly documented as private and non-anonymised.
 
 ## Real prospect ready — FAIL / currently outside product boundary
 
