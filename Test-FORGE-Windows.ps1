@@ -15,6 +15,11 @@ $releaseFiles = @(
     "BACKUP_FORGE.bat", "Backup-FORGE.ps1"
 )
 
+$listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, 0)
+$listener.Start()
+$validationPort = ([System.Net.IPEndPoint]$listener.LocalEndpoint).Port
+$listener.Stop()
+
 function Stop-AcceptanceForge {
     if (Test-Path -LiteralPath $processIdFile) {
         $launchedId = [int](Get-Content -LiteralPath $processIdFile -Raw)
@@ -30,12 +35,14 @@ function Stop-AcceptanceForge {
 
 function Invoke-Installer([string]$installerSource) {
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $installerSource "Install-FORGE.ps1") `
-        -InstallRoot $install -ShortcutPath $shortcut -ProcessIdPath $processIdFile -NoBrowser
+        -InstallRoot $install -ShortcutPath $shortcut -ProcessIdPath $processIdFile -NoBrowser `
+        -AcceptanceValidation -ValidationPort $validationPort
     if ($LASTEXITCODE -ne 0) { throw "Installer returned exit code $LASTEXITCODE." }
 }
 
 try {
     New-Item -ItemType Directory -Path $sandbox -Force | Out-Null
+    Write-Host "Acceptance health-check port: $validationPort" -ForegroundColor DarkGray
     Write-Host "[1/5] Clean isolated installation" -ForegroundColor Cyan
     Invoke-Installer $source
     if (-not (Test-Path -LiteralPath $database)) { throw "Clean install did not create forge.db." }
@@ -74,7 +81,8 @@ try {
     $badApp = Join-Path $badSource "forge_app.py"
     (Get-Content -LiteralPath $badApp -Raw).Replace('APP_VERSION = "0.10.0"', 'APP_VERSION = "0.0.0-acceptance-failure"') | Set-Content -LiteralPath $badApp -Encoding UTF8
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $badSource "Install-FORGE.ps1") `
-        -InstallRoot $install -ShortcutPath $shortcut -ProcessIdPath $processIdFile -NoBrowser
+        -InstallRoot $install -ShortcutPath $shortcut -ProcessIdPath $processIdFile -NoBrowser `
+        -AcceptanceValidation -ValidationPort $validationPort
     if ($LASTEXITCODE -eq 0) { throw "The deliberately invalid upgrade unexpectedly succeeded." }
     $rolledBackMarker = & $python -c "import sqlite3,sys; c=sqlite3.connect(sys.argv[1]); print(c.execute('PRAGMA integrity_check').fetchone()[0]+'|'+c.execute('SELECT value FROM app_meta WHERE key=?',('acceptance_marker',)).fetchone()[0]); c.close()" $database
     if ($rolledBackMarker.Trim() -ne ("ok|" + $marker)) { throw "Rollback did not preserve the prior database." }
