@@ -80,7 +80,7 @@ try {
     if ($rolledBackMarker.Trim() -ne ("ok|" + $marker)) { throw "Rollback did not preserve the prior database." }
     if ((Get-Content -LiteralPath (Join-Path $install "forge_app.py") -Raw) -notmatch 'APP_VERSION = "0.10.0"') { throw "Rollback did not restore the prior application." }
 
-    Write-Host "[5/5] PASS — install, shortcut, upgrade, backup/restore and rollback" -ForegroundColor Green
+    Write-Host "[5/5] PASS - install, shortcut, upgrade, backup/restore and rollback" -ForegroundColor Green
     Write-Host "Acceptance sandbox: $sandbox"
 } finally {
     Stop-AcceptanceForge
