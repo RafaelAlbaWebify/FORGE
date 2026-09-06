@@ -25,30 +25,29 @@
 
 - Severity: P1
 - Module: packaging
-- Status: open
-- Description: automated 0.10.0 clean install, shortcut targeting, upgrade, restore and forced rollback pass on `windows-latest`; Rafael's real installation and Desktop shortcut still require human confirmation.
-- Workaround: installer rollback and preserved-folder logic reduce risk.
-- Blocking effect: production-ready gate remains closed.
-- Next action: install the verified release on Rafael's PC, open it from the real Desktop shortcut and confirm existing records remain visible.
+- Status: resolved 2026-09-06
+- Description: Windows install, shortcut targeting, upgrade, restore and forced rollback required real-machine confirmation.
+- Resolution evidence: Rafael's real FORGE 0.10.0 installation, Desktop shortcut, retained records, SQLite integrity, runtime identity and browser workflow all passed. A later five-stage isolated Windows acceptance also verified clean installation, data-preserving upgrade, backup/restore and deliberately failed-upgrade rollback with a clear human-visible recovery message.
+- Follow-up: clean-user/external distribution testing is optional and only required if FORGE is distributed beyond the current personal single-user boundary.
 
 ## FORGE-004 — Frontend maintainability debt
 
 - Severity: P2
 - Module: UI
-- Status: open
+- Status: open, non-blocking
 - Description: `static/app.js` and `static/styles.css` are dense single files; `layout.css` is a corrective layer.
 - Evidence: source inspection.
-- Blocking effect: raises regression risk and slows review.
-- Next action: split rendering, API, dialogs and views into bounded modules without changing runtime dependencies.
+- Blocking effect: none for current personal operability; raises regression risk and slows future review.
+- Next action: split rendering, API, dialogs and views into bounded modules when maintenance value justifies the refactor.
 
 ## FORGE-005 — Legacy tomorrow endpoints remain
 
 - Severity: P2
 - Module: core/API
-- Status: open
+- Status: open, non-blocking
 - Description: `prepare_tomorrow` and `/api/tomorrow` remain even though the primary product decision moved planning to ChatGPT.
 - Workaround: current UI does not call them.
-- Blocking effect: creates two possible workflows and future ambiguity.
+- Blocking effect: none for current personal operability; creates future workflow ambiguity.
 - Next action: deprecate with tests, then remove in a schema-compatible release if no export depends on it.
 
 ## FORGE-006 — Restore drill not verified
@@ -64,9 +63,10 @@
 
 - Severity: P3
 - Module: API/UI
-- Status: open
+- Status: open, non-blocking
 - Description: archive API returns at most 200 missions, 100 projects and 200 milestones without pagination.
 - Workaround: sufficient for current small dataset.
+- Blocking effect: none for current dataset and intended personal use.
 - Next action: add pagination only when actual volume approaches the cap.
 
 ## FORGE-008 — Git source control unavailable
@@ -76,4 +76,4 @@
 - Status: resolved 2026-09-05
 - Description: local Git history and the public `RafaelAlbaWebify/FORGE` remote now preserve application source and project-control history.
 - Resolution evidence: baseline source published to GitHub with 43 tracked files; local runtime directories remain ignored.
-- Follow-up: confirm all three hosted CI jobs pass before crediting readiness.
+- Follow-up: hosted CI is already passing and remains part of maintenance verification.
