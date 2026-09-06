@@ -2,7 +2,9 @@ param(
     [string]$InstallRoot = "",
     [string]$ShortcutPath = "",
     [string]$ProcessIdPath = "",
-    [switch]$NoBrowser
+    [switch]$NoBrowser,
+    [switch]$AcceptanceValidation,
+    [int]$ValidationPort = 0
 )
 
 $ErrorActionPreference = "Stop"
@@ -54,6 +56,7 @@ $pythonConsolePath = if ($pythonConsole) { $pythonConsole.Source } else { (Get-C
 if (-not $pythonConsolePath) { throw "Python 3.10 or newer was not found." }
 $pythonVersionOk = & $pythonConsolePath -c "import sys; raise SystemExit(0 if sys.version_info >= (3,10) else 1)"
 if ($LASTEXITCODE -ne 0) { throw "FORGE requires Python 3.10 or newer." }
+if ($AcceptanceValidation -and $ValidationPort -le 0) { throw "Acceptance validation requires a dedicated ValidationPort." }
 
 # Capture and protect all existing user records before changing application files.
 $database = Join-Path $installRoot "data\forge.db"
@@ -108,18 +111,41 @@ $shortcut.Description = "FORGE daily command board"
 $shortcut.IconLocation = $pythonPath + ",0"
 $shortcut.Save()
 
+$launchPath = if ($AcceptanceValidation) { $pythonConsolePath } else { $pythonPath }
 $launchArguments = @('"' + (Join-Path $installRoot "forge_app.py") + '"')
 if ($NoBrowser) { $launchArguments += "--no-browser" }
-$launchedProcess = Start-Process -FilePath $pythonPath -ArgumentList $launchArguments -WorkingDirectory $installRoot -PassThru
+if ($AcceptanceValidation) {
+    $launchArguments += @("--port", [string]$ValidationPort, "--port-span", "1")
+}
+
+$stdoutPath = Join-Path $installRoot "acceptance-stdout.log"
+$stderrPath = Join-Path $installRoot "acceptance-stderr.log"
+if ($AcceptanceValidation) {
+    Remove-Item -LiteralPath $stdoutPath,$stderrPath -Force -ErrorAction SilentlyContinue
+    $launchedProcess = Start-Process -FilePath $launchPath -ArgumentList $launchArguments -WorkingDirectory $installRoot -PassThru -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+} else {
+    $launchedProcess = Start-Process -FilePath $launchPath -ArgumentList $launchArguments -WorkingDirectory $installRoot -PassThru
+}
 if ($ProcessIdPath) {
     Set-Content -LiteralPath ([IO.Path]::GetFullPath($ProcessIdPath)) -Value $launchedProcess.Id -Encoding ASCII
 }
 
 $verifiedUrl = $null
 $unexpectedVersion = $null
-for ($attempt = 0; $attempt -lt 30 -and -not $verifiedUrl; $attempt++) {
+$portsToCheck = if ($AcceptanceValidation) { @($ValidationPort) } else { 8877..8896 }
+$attemptLimit = if ($AcceptanceValidation) { 40 } else { 30 }
+for ($attempt = 0; $attempt -lt $attemptLimit -and -not $verifiedUrl; $attempt++) {
     Start-Sleep -Milliseconds 250
-    foreach ($port in 8877..8896) {
+    if ($AcceptanceValidation) {
+        $launchedProcess.Refresh()
+        if ($launchedProcess.HasExited) {
+            $stderrText = if (Test-Path -LiteralPath $stderrPath) { (Get-Content -LiteralPath $stderrPath -Raw).Trim() } else { "" }
+            if (-not $stderrText) { $stderrText = "No stderr was captured." }
+            throw "FORGE acceptance process exited before health validation. $stderrText"
+        }
+        if ($attempt -eq 8) { Write-Host "Waiting for isolated FORGE health check on port $ValidationPort..." -ForegroundColor DarkGray }
+    }
+    foreach ($port in $portsToCheck) {
         try {
             $identity = Invoke-RestMethod -Uri "http://127.0.0.1:$port/api/identity" -TimeoutSec 1
             $identityRoot = if ($identity.root) { [IO.Path]::GetFullPath([string]$identity.root) } else { "" }
@@ -136,7 +162,11 @@ for ($attempt = 0; $attempt -lt 30 -and -not $verifiedUrl; $attempt++) {
     if ($unexpectedVersion) { break }
 }
 if ($unexpectedVersion) { throw "FORGE started from the expected installation folder but reported version '$unexpectedVersion' instead of '0.10.0'." }
-if (-not $verifiedUrl) { throw "FORGE was copied but version 0.10.0 did not start correctly." }
+if (-not $verifiedUrl) {
+    $stderrText = if ($AcceptanceValidation -and (Test-Path -LiteralPath $stderrPath)) { (Get-Content -LiteralPath $stderrPath -Raw).Trim() } else { "" }
+    $detail = if ($stderrText) { " Diagnostic stderr: $stderrText" } else { "" }
+    throw "FORGE was copied but version 0.10.0 did not start correctly.$detail"
+}
 
 if ($preState) {
     $postState = & $pythonConsolePath -c "import json,sqlite3,sys; c=sqlite3.connect(sys.argv[1]); assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'; tables=['missions','timer_sessions','time_adjustments','projects','milestones','daily_notes']; print(json.dumps({t:c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0] for t in tables})); c.close()" $database | ConvertFrom-Json
