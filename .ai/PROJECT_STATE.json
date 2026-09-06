@@ -1,47 +1,50 @@
 {
   "project_name": "FORGE",
   "version": "0.10.0",
-  "last_updated": "2026-09-05",
+  "last_updated": "2026-09-06",
   "git": {"is_repository": true, "commit": null, "branch": "main", "remote": "https://github.com/RafaelAlbaWebify/FORGE", "visibility": "public"},
-  "current_phase": "Human Windows acceptance and release hardening",
-  "current_milestone": "Run the 0.10.0 release on Rafael's Windows installation and verify the real Desktop shortcut and retained records",
-  "overall_completion_percent": 86,
-  "operability_percent": 82,
+  "current_phase": "Release hardening",
+  "current_milestone": "Verify and minimise the portable AI snapshot privacy boundary",
+  "overall_completion_percent": 90,
+  "operability_percent": 90,
   "testing_percent": 95,
-  "current_blockers": [
-    "Rafael's real 0.10.0 install/upgrade, Desktop shortcut and human visual acceptance are not yet evidenced"
-  ],
+  "current_blockers": [],
   "known_critical_failures": [],
-  "active_workstreams": ["Human Windows acceptance", "release verification", "accessibility acceptance"],
+  "active_workstreams": ["AI snapshot privacy/minimisation", "release verification", "recovery and installation acceptance"],
   "completed_milestones": [
     "Crash-safe focus timer with pause/resume/manual correction",
     "SQLite backups and installer rollback path",
     "Portable AI snapshot v2 and stale/idempotent plan import",
     "Today/Map/Review compact workflow",
-    "Persistent .ai project-control bootstrap"
-    ,"Privacy-safe local Git and public GitHub CI bootstrap",
+    "Persistent .ai project-control bootstrap",
+    "Privacy-safe local Git and public GitHub CI bootstrap",
     "Hosted Linux, Windows and four-viewport Chromium verification",
     "Complete advanced-editor parity for user-owned fields",
-    "Automated Windows clean-install, upgrade, shortcut, restore and rollback acceptance"
+    "Automated Windows clean-install, upgrade, shortcut, restore and rollback acceptance",
+    "Real Windows 0.10.0 installation, shortcut target, database integrity and running-root identity verification",
+    "Human real-browser retention, visual layout and keyboard-focus acceptance"
   ],
   "pending_milestones": [
-    "Fresh Windows upgrade acceptance with retained user data",
+    "AI snapshot privacy and data-minimisation acceptance",
+    "Manual recovery/error-message acceptance",
+    "Clean-user installation instruction validation",
+    "Repeatable release checklist and version provenance",
     "Consolidated maintainable frontend source"
   ],
   "next_recommended_actions": [
-    "Install the verified 0.10.0 release on Rafael's Windows machine and confirm the real Desktop shortcut opens the retained data",
-    "Perform a short human Chrome visual and keyboard check",
-    "Only then reassess internal-testing readiness"
+    "Review the exact forge-snapshot 2.0 fields against the AI exchange contract and remove unnecessary local bookkeeping data",
+    "Add regression tests for snapshot privacy/minimisation",
+    "Then verify recovery messaging and the clean-user installation path"
   ],
   "readiness": {
     "development_ready": true,
-    "internal_testing_ready": false,
+    "internal_testing_ready": true,
     "external_testing_ready": false,
     "real_prospect_ready": false,
     "production_ready": false
   },
   "last_verified_evidence": {
-    "date": "2026-09-05",
+    "date": "2026-09-06",
     "python_tests": {"passed": 54, "failed": 0, "platforms": ["Linux", "Windows"]},
     "syntax": {"python": "pass", "javascript": "pass", "html_parse": "pass"},
     "api_smoke": "pass on clean temporary instance",
@@ -49,6 +52,16 @@
     "playwright": "pass in hosted Chromium at 1920x1080, 1366x768, 820x1000 and 390x844",
     "github_actions": "all three jobs pass on head 8b166dec46841e6d2d2f7a115746f9972ef2270a (run 33949201547); merged as e53acfcabf6cd9bfd42971cf9171f84942d69ee5",
     "windows_runtime": "54 tests, loopback identity and isolated installer acceptance pass on windows-latest",
-    "windows_installer": "automated clean install, shortcut target, data-preserving upgrade, backup restore and forced rollback pass; real user-machine acceptance remains"
+    "windows_installer": "automated clean install, shortcut target, data-preserving upgrade, backup restore and forced rollback pass",
+    "real_windows_installation": {
+      "install_root": "C:\\Users\\ralba\\AppData\\Local\\FORGE",
+      "version": "0.10.0",
+      "shortcut_target": "C:\\Python314\\pythonw.exe",
+      "shortcut_arguments": "\"C:\\Users\\ralba\\AppData\\Local\\FORGE\\forge_app.py\"",
+      "database_integrity": "ok",
+      "record_counts": {"missions": 100, "timer_sessions": 22, "time_adjustments": 19, "projects": 6, "milestones": 30, "daily_notes": 0},
+      "runtime_identity": {"app": "FORGE", "version": "0.10.0", "root": "C:\\Users\\ralba\\AppData\\Local\\FORGE"},
+      "human_visual_acceptance": "pass; retained data visible, Today/Map/Review look correct, keyboard focus works"
+    }
   }
 }
